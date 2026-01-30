@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlqeifrqd8kjf"]
+
+[ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_jbqir"]
+[ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_yautc"]
+
+[node name="TestLevel" instance=ExtResource("1_jbqir")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_yautc")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dac228gkovlx8"]
+
+[ext_resource type="Script" uid="uid://xq04gdich1ih" path="res://scenes/levels/base_level.gd" id="1_md458"]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_md458")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="PlayerSpawn" type="Marker2D" parent="Markers"]
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Mobs" type="Node2D" parent="Entities"]
+
+[node name="Props" type="Node2D" parent="Entities"]
+
+[node name="Interactables" type="Node2D" parent="Entities"]

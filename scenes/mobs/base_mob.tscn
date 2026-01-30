@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://xgg8sv68o3vr"]
+
+[node name="BaseMob" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]

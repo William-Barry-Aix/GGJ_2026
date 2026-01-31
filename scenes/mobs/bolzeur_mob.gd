@@ -1,5 +1,5 @@
 extends BaseMob
-class_name Bolzeur
+class_name BolzeurMob
 
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 

@@ -1,0 +1,95 @@
+[gd_scene load_steps=17 format=3 uid="uid://cwtfa7ex186jg"]
+
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_nxa06"]
+[ext_resource type="Script" uid="uid://ky5lr0audj28" path="res://scenes/mobs/ghost_mob.gd" id="2_s6s5m"]
+[ext_resource type="Texture2D" uid="uid://bhvxy481i7bbq" path="res://assets/art/sprites/mobs/ghost.png" id="3_t03jh"]
+[ext_resource type="Texture2D" uid="uid://cjrkogks1muk2" path="res://assets/art/sprites/mobs/ghost/ghost_1.png" id="4_bb8ek"]
+[ext_resource type="Texture2D" uid="uid://c07tci4ae7mws" path="res://assets/art/sprites/mobs/ghost/ghost_2.png" id="5_nn6hg"]
+[ext_resource type="Texture2D" uid="uid://bqkev8r5rrvot" path="res://assets/art/sprites/mobs/ghost/ghost_3.png" id="6_pba0t"]
+[ext_resource type="Texture2D" uid="uid://bubsh3jf5kjel" path="res://assets/art/sprites/mobs/ghost/ghost_4.png" id="7_bv2uy"]
+[ext_resource type="Texture2D" uid="uid://dybpyshh4taew" path="res://assets/art/sprites/mobs/ghost/ghost_5.png" id="8_xdpfc"]
+[ext_resource type="Texture2D" uid="uid://bga0hs1bf8sn3" path="res://assets/art/sprites/mobs/ghost/ghost_6.png" id="9_un8j7"]
+[ext_resource type="Texture2D" uid="uid://jlerqvimxrwp" path="res://assets/art/sprites/mobs/ghost/ghost_7.png" id="10_ma0sa"]
+[ext_resource type="Texture2D" uid="uid://d2dbfjxh6i16a" path="res://assets/art/sprites/mobs/ghost/ghost_8.png" id="11_e7xgu"]
+[ext_resource type="Texture2D" uid="uid://dtkkyk2l716nw" path="res://assets/art/sprites/mobs/ghost/ghost_9.png" id="12_qfrgd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3htq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bb8ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nn6hg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pba0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bv2uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xdpfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_un8j7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ma0sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_e7xgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qfrgd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6yq"]
+radius = 30.0
+height = 80.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7msf"]
+radius = 42.0
+height = 106.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6clkx"]
+radius = 60.0
+height = 142.0
+
+[node name="GhostMob" instance=ExtResource("1_nxa06")]
+script = ExtResource("2_s6s5m")
+attack_range = 42.0
+attack_windup = 0.08
+attack_active = 0.1
+attack_cooldown = 0.6
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_t03jh")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(146, 102)
+sprite_frames = SubResource("SpriteFrames_3htq8")
+autoplay = "default"
+frame_progress = 0.40806565
+offset = Vector2(-146, -102)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(2, 0)
+shape = SubResource("CapsuleShape2D_ix6yq")
+
+[node name="Hurtbox" parent="." index="5"]
+health_path = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_j7msf")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_6clkx")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

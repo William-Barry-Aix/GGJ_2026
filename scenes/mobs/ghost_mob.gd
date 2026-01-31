@@ -1,5 +1,5 @@
 extends BaseMob
-class_name Ghost
+class_name GhostMob
 
 @export var attack_range: float = 42.0
 @export var attack_windup: float = 0.08
@@ -20,7 +20,7 @@ func _ready() -> void:
 	if p:
 		set_target(p)
 	if anim:
-		anim.play("idle") # make sure "idle" exists in SpriteFrames
+		anim.play("default") # make sure "idle" exists in SpriteFrames
 
 func _physics_process(delta: float) -> void:
 	if not is_alive:

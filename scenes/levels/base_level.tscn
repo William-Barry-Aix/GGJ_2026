@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xq04gdich1ih" path="res://scenes/levels/base_level.gd" id="1_md458"]
 [ext_resource type="Script" uid="uid://dtb5mmd8f3c56" path="res://scenes/levels/projectiles_manager.gd" id="2_uk53i"]
 [ext_resource type="Script" uid="uid://cj83gmv5ur6xp" path="res://scenes/levels/mobs.gd" id="2_ukglk"]
-[ext_resource type="PackedScene" uid="uid://bs1oyk7lsljrk" path="res://scenes/projectiles/bolzeur_projectile.tscn" id="4_wwrw0"]
+[ext_resource type="PackedScene" uid="uid://bs1oyk7lsljrk" path="res://scenes/Projectiles/bolzeur_projectile.tscn" id="4_wwrw0"]
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_md458")

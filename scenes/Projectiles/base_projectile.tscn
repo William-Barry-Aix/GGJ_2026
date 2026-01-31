@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dldr18unr3dp3"]
+[gd_scene load_steps=3 format=3 uid="uid://dldr18unr3dp3"]
 
 [ext_resource type="Script" uid="uid://bcl7s8pwe72bh" path="res://scenes/projectiles/base_projectile.gd" id="1_y3aew"]
+[ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="2_msk2k"]
 
 [node name="BaseProjectile" type="Area2D"]
 script = ExtResource("1_y3aew")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" parent="." instance=ExtResource("2_msk2k")]

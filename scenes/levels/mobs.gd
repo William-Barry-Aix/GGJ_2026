@@ -10,6 +10,15 @@ func _ready():
 func _bolzeur_spawn(pos):
 	var new_bolzeur = BOLZEUR_NODE.instantiate()
 	new_bolzeur.position = pos
-	new_bolzeur.bolzeur_attack.connect(projectiles_manager.bolzeur_attack)
+
+	new_bolzeur.request_radial_shot.connect(projectiles_manager.on_bolzeur_radial)
+
 	add_child(new_bolzeur)
-	
+
+
+#func _bolzeur_spawn(pos):
+	#var new_bolzeur = BOLZEUR_NODE.instantiate()
+	#new_bolzeur.position = pos
+	#new_bolzeur.bolzeur_attack.connect(projectiles_manager.bolzeur_attack)
+	#add_child(new_bolzeur)
+	#

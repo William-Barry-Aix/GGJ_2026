@@ -26,6 +26,7 @@ func set_active(v: bool) -> void:
 		_hit_this_activation.clear()
 
 func _on_area_entered(area: Area2D) -> void:
+	print("[Hitbox] entered by: ", area, " groups=", area.get_groups())
 	if not active:
 		return
 	if not area.is_in_group("hurtbox"):
@@ -45,7 +46,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if _hit_this_activation.has(area.get_instance_id()):
 		return
 	_hit_this_activation[area.get_instance_id()] = true
-
+	print("[Hitbox] HIT! target=", other_root, " dmg=", damage)
 	if area.has_method("receive_hit"):
 		area.call("receive_hit", damage, my_root)
 

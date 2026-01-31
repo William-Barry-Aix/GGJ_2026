@@ -22,5 +22,8 @@ navigation_polygon = SubResource("NavigationPolygon_yautc")
 [node name="PlayerSpawn" parent="Markers" index="0"]
 position = Vector2(-999, 212)
 
-[node name="Ghost" parent="Entities/Mobs" index="0" instance=ExtResource("3_8nlw5")]
-position = Vector2(-200, 100)
+[node name="GhostMob" parent="Entities/Mobs" index="0" instance=ExtResource("3_8nlw5")]
+slide_on_ceiling = false
+debug_combat = true
+debug_layers = true
+debug_state_changes_only = true

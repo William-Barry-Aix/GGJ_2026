@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
-radius = 39.012817
+radius = 26.019224
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
 radius = 116.00431
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p47bc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(237, 145)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -41,7 +41,7 @@ target_group = &"mob"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_p47bc")
+shape = SubResource("RectangleShape2D_75vfm")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]
 

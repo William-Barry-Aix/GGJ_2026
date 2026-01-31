@@ -8,8 +8,7 @@ class_name Hurtbox
 
 func _ready() -> void:
 	add_to_group("hurtbox")
-	collision_layer = GameConfig.LAYER_HURTBOX
-	collision_mask  = GameConfig.LAYER_HITBOX
+	GameConfig.setup_hurtbox(self)
 	if health == null:
 		push_error("[Hurtbox] Missing Health reference. Set health_path in inspector.")
 

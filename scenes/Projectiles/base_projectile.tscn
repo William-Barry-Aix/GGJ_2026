@@ -9,3 +9,4 @@ script = ExtResource("1_y3aew")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Hitbox" parent="." instance=ExtResource("2_msk2k")]
+target_group = &"player"

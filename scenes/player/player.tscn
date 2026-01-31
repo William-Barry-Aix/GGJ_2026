@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnx8flce3g5qd"]
+[gd_scene load_steps=9 format=3 uid="uid://dnx8flce3g5qd"]
 
 [ext_resource type="Script" uid="uid://botch64ia08bc" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dwc4akdfdlxo" path="res://assets/art/sprites/player/placeholder_player_2.png" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cuxfiydo0jxbj" path="res://scenes/combat/hurtbox.tscn" id="3_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_p47bc"]
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
+radius = 39.012817
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
 radius = 54.037025
@@ -13,7 +16,8 @@ radius = 54.037025
 size = Vector2(237, 145)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_8afob")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,6 +25,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_75vfm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -32,9 +37,10 @@ health_path = NodePath("../Health")
 shape = SubResource("CircleShape2D_p47bc")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
+target_group = &"mob"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(-0.5, 0.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_p47bc")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]

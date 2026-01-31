@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal died()
+signal reset_mob_target_pos(Vector2)
 
 @export var move_speed: float = 300.0
 @export var attack_duration: float = 0.12
@@ -16,10 +17,11 @@ var is_alive: bool = true
 
 func _ready() -> void:
 	add_to_group("player")
+	GameConfig.setup_player_body(self)
 	health.died.connect(_on_died)
 	melee_hitbox.set_active(false)
 
-signal reset_mob_target_pos(Vector2)
+
 
 func _physics_process(delta: float) -> void:
 	if not is_alive:

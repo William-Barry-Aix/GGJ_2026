@@ -8,13 +8,14 @@ class_name Hitbox
 		monitoring = value
 		if value:
 			_hit_this_activation.clear()
+@export var target_group: StringName = &""  # e.g. "player" or "mob"; empty = hit any hurtbox (except self)
+
 
 # Optional: avoid hitting the same hurtbox multiple times during one swing
 var _hit_this_activation: Dictionary = {}
 
 func _ready() -> void:
-	collision_layer = GameConfig.LAYER_HITBOX
-	collision_mask  = GameConfig.LAYER_HURTBOX
+	GameConfig.setup_hitbox(self)
 	monitoring = active
 	area_entered.connect(_on_area_entered)
 
@@ -37,7 +38,10 @@ func _on_area_entered(area: Area2D) -> void:
 	if my_root == other_root:
 		return
 
-	# One hit per activation per target (still useful)
+	if target_group != &"" and not other_root.is_in_group(target_group):
+		return
+
+		# One hit per activation per target (still useful)
 	if _hit_this_activation.has(area.get_instance_id()):
 		return
 	_hit_this_activation[area.get_instance_id()] = true

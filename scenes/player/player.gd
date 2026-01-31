@@ -19,6 +19,8 @@ func _ready() -> void:
 	health.died.connect(_on_died)
 	melee_hitbox.set_active(false)
 
+signal reset_mob_target_pos(Vector2)
+
 func _physics_process(delta: float) -> void:
 	if not is_alive:
 		return
@@ -49,7 +51,6 @@ func _handle_movement(_delta: float) -> void:
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	).normalized()
-
 	velocity = input * move_speed
 	move_and_slide()
 

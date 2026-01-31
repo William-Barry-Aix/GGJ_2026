@@ -4,6 +4,10 @@ class_name BaseLevel
 @export var debug_print_layer: bool = false
 @onready var layer_tint: CanvasModulate = get_node_or_null("LayerTint") as CanvasModulate
 
+func _enter_tree() -> void:
+	add_to_group("level")
+	LevelManager.layer_changed.connect(on_layer_changed)
+
 func _ready() -> void:
 	if not LevelManager.layer_changed.is_connected(on_layer_changed):
 		LevelManager.layer_changed.connect(on_layer_changed)

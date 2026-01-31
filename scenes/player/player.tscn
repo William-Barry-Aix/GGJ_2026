@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnx8flce3g5qd"]
 
 [ext_resource type="Script" uid="uid://botch64ia08bc" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://brahheldaik8m" path="res://assets/art/sprites/player/placeholder_player_2.png" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dwc4akdfdlxo" path="res://assets/art/sprites/player/placeholder_player_2.png" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cuxfiydo0jxbj" path="res://scenes/combat/hurtbox.tscn" id="3_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_p47bc"]
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]

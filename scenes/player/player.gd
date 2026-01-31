@@ -87,3 +87,4 @@ func _on_died() -> void:
 	_can_attack = false
 	melee_hitbox.set_active(false)
 	velocity = Vector2.ZERO
+	died.emit() # <-- REQUIRED so GameRoot respawns

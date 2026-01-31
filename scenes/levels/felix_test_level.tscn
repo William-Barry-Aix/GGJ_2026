@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2m7ffm0efodc"]
+
+[ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_bswqx"]
+[ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_l2ppn"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bswqx"]
+vertices = PackedVector2Array(-118.3125, -36.921875, -126.296875, -157.88281, -55.703125, -157.10156, -47.710938, 106.84375, -55.148438, 151.89063, -486.92188, 163.54688, -612.6172, 156.50781, -617.28906, 88.85156, -255.15625, 83.86719, -53.140625, 290.9297, -487.90625, 288.0625, 150, 110.171875, 150, -147.96875, 586.1172, -147.02344, 589.8672, 158.88281, -253.15625, -37.921875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 3), PackedInt32Array(4, 9, 10, 5), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(11, 14, 4, 3), PackedInt32Array(0, 3, 8, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(596, -157, 600, 169, -45, 162, -43, 301, -498, 298, -497, 173, -622, 166, -628, 79, -265, 74, -263, -48, -129, -47, -137, -168, -46, -167, -38, 97, 140, 100, 140, -158)])
+
+[node name="FelixTestLevel" instance=ExtResource("1_bswqx")]
+
+[node name="NavigationRegion2D" parent="Navigation" index="0"]
+navigation_polygon = SubResource("NavigationPolygon_bswqx")
+
+[node name="SpaceshipPlaceholder" type="Sprite2D" parent="." index="4"]
+position = Vector2(20, 37)
+texture = ExtResource("2_l2ppn")

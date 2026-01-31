@@ -1,20 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhdna0g1wnc35"]
+[gd_scene load_steps=6 format=3 uid="uid://bhdna0g1wnc35"]
 
 [ext_resource type="Script" uid="uid://csvantjxsvsqn" path="res://scenes/root/game_root.gd" id="1_oamxu"]
 [ext_resource type="PackedScene" uid="uid://dnx8flce3g5qd" path="res://scenes/player/player.tscn" id="2_2eikp"]
-[ext_resource type="PackedScene" uid="uid://dlqeifrqd8kjf" path="res://scenes/levels/test_level.tscn" id="3_orhnb"]
+[ext_resource type="PackedScene" uid="uid://c2m7ffm0efodc" path="res://scenes/levels/felix_test_level.tscn" id="2_orhnb"]
 [ext_resource type="PackedScene" uid="uid://bv20wuwjym7re" path="res://scenes/ui/hud.tscn" id="3_q82se"]
+[ext_resource type="PackedScene" uid="uid://bjxn5c0nf7gwm" path="res://scenes/mobs/bolzeur.tscn" id="4_orhnb"]
 
 [node name="GameRoot" type="Node"]
 script = ExtResource("1_oamxu")
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="TestLevel" parent="World" instance=ExtResource("3_orhnb")]
+[node name="FelixTestLevel" parent="World" instance=ExtResource("2_orhnb")]
+position = Vector2(-1106, 78)
 
 [node name="Player" parent="World" instance=ExtResource("2_2eikp")]
 position = Vector2(-924, 202)
 
+[node name="Bolzeur" parent="World" instance=ExtResource("4_orhnb")]
+position = Vector2(-567, -12)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="UI" instance=ExtResource("3_q82se")]
+
+[connection signal="reset_mob_target_pos" from="World/Player" to="World/Bolzeur" method="_on_player_reset_mob_target_pos"]

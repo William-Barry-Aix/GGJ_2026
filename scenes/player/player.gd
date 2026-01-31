@@ -25,11 +25,10 @@ signal reset_mob_target_pos(Vector2)
 var _can_attack: bool = true
 var is_alive: bool = true
 var _last_layer: int = -999
+
 enum Facing { RIGHT, LEFT }
 var facing: int = Facing.RIGHT
-
 var _attacking: bool = false
-var _last_layer: int = -999
 
 func _ready() -> void:
 	add_to_group("player")
@@ -104,6 +103,7 @@ func _input(event: InputEvent) -> void:
 		print("[Input] action attack pressed (_input)")
 		try_attack()
 
+
 func _handle_layer_hotkeys() -> void:
 	if Input.is_action_just_pressed("layer_1"):
 		LevelManager.set_layer(LevelManager.Layer.MASK_OFF)
@@ -116,8 +116,6 @@ func _handle_layer_hotkeys() -> void:
 
 func _handle_movement() -> void:
 	var raw := Vector2(
-func _handle_movement() -> void:
-	var input := Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
@@ -157,10 +155,6 @@ func try_attack() -> void:
 
 	if not is_alive:
 		return
-
-	if LevelManager.current_layer == LevelManager.Layer.MASK_OFF:
-		return
-
 	if not _can_attack:
 		if debug_combat or debug_input:
 			print("[Player] blocked: cooldown")
@@ -168,7 +162,6 @@ func try_attack() -> void:
 	if melee_hitbox == null:
 		push_error("[Player] Tried to attack but melee_hitbox is null.")
 		return
-
 	if melee_hitbox == null:
 		push_error("[Player] Tried to attack but melee_hitbox is null.")
 		return
@@ -190,7 +183,7 @@ func try_attack() -> void:
 		print("[Player] attack start (damage=", can_damage, ")")
 
 	if debug_combat:
-		print("[Player] attack start")
+		print("[Player] attack start (damage=", can_damage, ")")
 
 	await get_tree().create_timer(attack_duration).timeout
 	if not is_alive or not is_inside_tree():
@@ -218,7 +211,8 @@ func try_attack() -> void:
 		return
 	if not is_alive or not is_inside_tree():
 		return
-
+	if not is_alive or not is_inside_tree():
+		return
 	_can_attack = true
 
 func reset_after_respawn() -> void:
@@ -234,6 +228,13 @@ func reset_after_respawn() -> void:
 		print("[Player] respawned")
 	if melee_hitbox:
 		melee_hitbox.set_active(false)
+	_play_anim("idle_right" if facing == Facing.RIGHT else "idle_left")
+
+	if debug_combat:
+		print("[Player] respawned")
+	if melee_hitbox:
+		melee_hitbox.set_active(false)
+	_play_anim("idle_right" if facing == Facing.RIGHT else "idle_left")
 
 	if debug_combat:
 		print("[Player] respawned")
@@ -275,6 +276,8 @@ func _play_anim(name: String) -> void:
 	if debug_combat:
 		print("[Player] died")
 
+	_play_anim("idle_right" if facing == Facing.RIGHT else "idle_left")
+
 	died.emit() # REQUIRED so GameRoot respawns
 
 ### Light debug ###
@@ -286,3 +289,34 @@ func _on_layer_changed(layer: int) -> void:
 		return
 	_last_layer = layer
 	print("[Player] layer=", layer)
+
+func _play_anim(name: String) -> void:
+	if anim == null:
+		return
+	if anim.current_animation == name and anim.is_playing():
+		return
+	anim.play(name)
+
+	if debug_combat:
+		print("[Player] died")
+	
+	_play_anim("idle_right" if facing == Facing.RIGHT else "idle_left")
+
+	died.emit() # REQUIRED so GameRoot respawns
+
+### Light debug ###
+
+func _on_layer_changed(layer: int) -> void:
+	if not debug_layers:
+		return
+	if layer == _last_layer:
+		return
+	_last_layer = layer
+	print("[Player] layer=", layer)
+
+func _play_anim(name: String) -> void:
+	if anim == null:
+		return
+	if anim.current_animation == name and anim.is_playing():
+		return
+	anim.play(name)

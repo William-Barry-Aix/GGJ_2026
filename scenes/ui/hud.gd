@@ -96,10 +96,8 @@ func _apply_healthbar_style() -> void:
 
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = Color(0.25, 0.9, 0.25, 0.95)
-	fill.corner_radius_top_left = 8
-	fill.corner_radius_top_right = 8
-	fill.corner_radius_bottom_left = 8
-	fill.corner_radius_bottom_right = 8
+	fill.corner_radius_all = 8
+
 
 	health_bar.add_theme_stylebox_override("background", bg)
 	health_bar.add_theme_stylebox_override("fill", fill)

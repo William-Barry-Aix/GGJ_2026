@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dac228gkovlx8"]
 
 [ext_resource type="Script" uid="uid://xq04gdich1ih" path="res://scenes/levels/base_level.gd" id="1_md458"]
+[ext_resource type="TileSet" uid="uid://bqgftmy84st4j" path="res://scenes/levels/Spaceship.tres" id="2_o1chu"]
 [ext_resource type="Script" uid="uid://dtb5mmd8f3c56" path="res://scenes/levels/projectiles_manager.gd" id="2_uk53i"]
 [ext_resource type="Script" uid="uid://cj83gmv5ur6xp" path="res://scenes/levels/mobs.gd" id="2_ukglk"]
-[ext_resource type="TileSet" uid="uid://br3e7qktyh2pt" path="res://scenes/levels/Holes.tres" id="3_53c65"]
 [ext_resource type="PackedScene" uid="uid://bs1oyk7lsljrk" path="res://scenes/Projectiles/bolzeur_projectile.tscn" id="4_wwrw0"]
 
 [node name="BaseLevel" type="Node2D"]
@@ -14,15 +14,30 @@ script = ExtResource("1_md458")
 [node name="Tilemaps" type="Node2D" parent="."]
 
 [node name="Walls" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
 
 [node name="Ground" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
 
 [node name="HolesBlue" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("3_53c65")
+tile_set = ExtResource("2_o1chu")
 
 [node name="WallsGreen" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
 
 [node name="SpikesRed" type="TileMapLayer" parent="Tilemaps"]
+
+[node name="props" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
+
+[node name="DoorGreen" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
+
+[node name="DoorRed" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
+
+[node name="DoorBlue" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("2_o1chu")
 
 [node name="LayerTint" type="CanvasModulate" parent="."]
 

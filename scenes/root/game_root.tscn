@@ -18,5 +18,3 @@ position = Vector2(-924, 202)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="UI" instance=ExtResource("3_q82se")]
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]

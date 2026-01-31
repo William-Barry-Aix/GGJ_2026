@@ -8,13 +8,19 @@
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_md458")
 
-[node name="WallsGreen" type="TileMapLayer" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 
-[node name="SpikesRed" type="TileMapLayer" parent="."]
+[node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="HolesBlue" type="TileMapLayer" parent="."]
+[node name="WallsGreen" type="TileMapLayer" parent="Tilemaps"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="HolesBlue" type="TileMapLayer" parent="Tilemaps"]
+
+[node name="SpikesRed" type="TileMapLayer" parent="Tilemaps"]
+
+[node name="Walls" type="TileMapLayer" parent="Tilemaps"]
+
+[node name="Ground" type="TileMapLayer" parent="Tilemaps"]
 
 [node name="LayerTint" type="CanvasModulate" parent="."]
 
@@ -39,5 +45,3 @@ script = ExtResource("2_ukglk")
 unique_name_in_owner = true
 script = ExtResource("2_uk53i")
 bolzeur_projectile_scene = ExtResource("4_wwrw0")
-
-[node name="Tilemaps" type="Node2D" parent="."]

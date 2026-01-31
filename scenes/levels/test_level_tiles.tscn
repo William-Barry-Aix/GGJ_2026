@@ -1,67 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlqeifrqd8kjf"]
+[gd_scene load_steps=3 format=3 uid="uid://dlqeifrqd8kjf"]
 
 [ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_jbqir"]
 [ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_yautc"]
-[ext_resource type="Texture2D" uid="uid://brgdaebd0qgi3" path="res://assets/art/sprites/tilesets/spaceship_placeholder - Copie.png" id="3_fr1um"]
-[ext_resource type="Texture2D" uid="uid://ceuxchy8bwot5" path="res://assets/art/sprites/tilesets/laser_frame1.png" id="4_48ne7"]
-[ext_resource type="Texture2D" uid="uid://b83pisbmvo1oi" path="res://assets/art/sprites/tilesets/holes.png" id="4_v45ci"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v45ci"]
-texture = ExtResource("3_fr1um")
-margins = Vector2i(101, 94)
-texture_region_size = Vector2i(127, 245)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -62, 64, -62, 64, 62, -64, 62)
-
-[sub_resource type="TileSet" id="TileSet_48ne7"]
-tile_size = Vector2i(128, 124)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_v45ci")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6xh4u"]
-texture = ExtResource("4_48ne7")
-separation = Vector2i(33, 0)
-texture_region_size = Vector2i(560, 876)
-use_texture_padding = false
-0:0/0 = 0
-1:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_cyt5c"]
-tile_size = Vector2i(536, 416)
-sources/0 = SubResource("TileSetAtlasSource_6xh4u")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_48ne7"]
-texture = ExtResource("4_v45ci")
-margins = Vector2i(36, 36)
-texture_region_size = Vector2i(125, 125)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_6xh4u"]
-tile_size = Vector2i(126, 124)
-physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_48ne7")
 
 [node name="TestLevel" instance=ExtResource("1_jbqir")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-position = Vector2(72, -69)
-scale = Vector2(2, 2)
+[node name="Background" parent="." index="0"]
 texture = ExtResource("2_yautc")
-
-[node name="WallsGreen" parent="." index="1"]
-scale = Vector2(2, 2.05)
-tile_map_data = PackedByteArray(0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0)
-tile_set = SubResource("TileSet_48ne7")
-use_kinematic_bodies = true
-collision_visibility_mode = 1
-
-[node name="SpikesRed" parent="." index="2"]
-scale = Vector2(0.48, 0.605)
-tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-tile_set = SubResource("TileSet_cyt5c")
-
-[node name="HolesBlue" parent="." index="3"]
-scale = Vector2(2.03, 2.065)
-tile_map_data = PackedByteArray(0, 0, 3, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0)
-tile_set = SubResource("TileSet_6xh4u")

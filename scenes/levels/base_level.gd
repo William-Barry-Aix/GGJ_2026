@@ -2,15 +2,16 @@ extends Node2D
 class_name BaseLevel
 
 @export var debug_print_layer: bool = false
+@onready var tilemaps: Node = get_node_or_null("Tilemaps")
 @onready var layer_tint: CanvasModulate = get_node_or_null("LayerTint") as CanvasModulate
 
 func _enter_tree() -> void:
 	add_to_group("level")
 	LevelManager.layer_changed.connect(on_layer_changed)
 	
-@onready var walls_green: TileMapLayer = get_node_or_null("WallsGreen") as TileMapLayer
-@onready var spikes_red: TileMapLayer = get_node_or_null("SpikesRed") as TileMapLayer
-@onready var holes_blue: TileMapLayer = get_node_or_null("HolesBlue") as TileMapLayer
+@onready var walls_green: TileMapLayer = get_node_or_null("Tilemaps/WallsGreen") as TileMapLayer
+@onready var spikes_red: TileMapLayer = get_node_or_null("Tilemaps/SpikesRed") as TileMapLayer
+@onready var holes_blue: TileMapLayer = get_node_or_null("Tilemaps/HolesBlue") as TileMapLayer
 
 var _base_collision_layer: int = 0
 var _active_collision_layer: int = 0

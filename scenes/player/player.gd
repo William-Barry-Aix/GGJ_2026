@@ -76,8 +76,10 @@ func try_attack() -> void:
 
 func reset_after_respawn() -> void:
 	is_alive = true
-	_can_attack = true
 	health.reset_full()
+	_can_attack = true
+	melee_hitbox.set_active(false)
+	
 
 func _on_died() -> void:
 	is_alive = false

@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
-radius = 75.0
+radius = 54.037025
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p47bc"]
-size = Vector2(118, 144)
+size = Vector2(237, 145)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
@@ -34,7 +34,7 @@ shape = SubResource("CircleShape2D_p47bc")
 [node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(59, 1)
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_p47bc")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]

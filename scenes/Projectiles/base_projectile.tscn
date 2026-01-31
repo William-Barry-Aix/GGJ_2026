@@ -6,6 +6,6 @@
 [node name="BaseProjectile" type="Area2D"]
 script = ExtResource("1_y3aew")
 
-[node name="Hitbox" parent="." instance=ExtResource("2_msk2k")]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Hitbox" parent="." instance=ExtResource("2_msk2k")]

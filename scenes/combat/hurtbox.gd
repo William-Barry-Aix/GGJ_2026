@@ -13,6 +13,7 @@ func _ready() -> void:
 		push_error("[Hurtbox] Missing Health reference. Set health_path in inspector.")
 
 func receive_hit(damage: int, source: Node = null) -> void:
+	print("[Hurtbox] receive_hit dmg=", damage, " source=", source)
 	if health == null:
 		return
 

@@ -11,6 +11,10 @@ signal reset_mob_target_pos(Vector2)
 # Light debug toggles (low spam)
 @export var debug_combat: bool = false
 @export var debug_layers: bool = false
+
+# Light debug toggles (low spam)
+@export var debug_combat: bool = false
+@export var debug_layers: bool = false
 @export var debug_input: bool = true
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -25,10 +29,24 @@ enum Facing { RIGHT, LEFT }
 var facing: int = Facing.RIGHT
 
 var _attacking: bool = false
+var _last_layer: int = -999
 
 func _ready() -> void:
 	add_to_group("player")
 	GameConfig.setup_player_body(self)
+
+	if health == null:
+		push_error("[Player] Missing $Health")
+	else:
+		health.died.connect(_on_died)
+
+	if hurtbox == null:
+		push_error("[Player] Missing $Hurtbox")
+
+	if melee_hitbox == null:
+		push_error("[Player] Missing $Hitbox")
+	else:
+		melee_hitbox.set_active(false)
 
 	if health == null:
 		push_error("[Player] Missing $Health")
@@ -53,11 +71,20 @@ func _exit_tree() -> void:
 
 func get_hurt_sfx_key() -> StringName:
 	return &"player_hurt"
+	if debug_layers and not LevelManager.layer_changed.is_connected(_on_layer_changed):
+		LevelManager.layer_changed.connect(_on_layer_changed)
+	_on_layer_changed(LevelManager.current_layer)
 
+func _exit_tree() -> void:
+	if debug_layers and LevelManager.layer_changed.is_connected(_on_layer_changed):
+		LevelManager.layer_changed.disconnect(_on_layer_changed)
+
+func _physics_process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if not is_alive:
 		return
 	_handle_layer_hotkeys()
+	_handle_movement()
 	_handle_movement()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -77,7 +104,6 @@ func _input(event: InputEvent) -> void:
 		print("[Input] action attack pressed (_input)")
 		try_attack()
 
-
 func _handle_layer_hotkeys() -> void:
 	if Input.is_action_just_pressed("layer_1"):
 		LevelManager.set_layer(LevelManager.Layer.MASK_OFF)
@@ -90,6 +116,8 @@ func _handle_layer_hotkeys() -> void:
 
 func _handle_movement() -> void:
 	var raw := Vector2(
+func _handle_movement() -> void:
+	var input := Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
@@ -129,10 +157,18 @@ func try_attack() -> void:
 
 	if not is_alive:
 		return
+
+	if LevelManager.current_layer == LevelManager.Layer.MASK_OFF:
+		return
+
 	if not _can_attack:
 		if debug_combat or debug_input:
 			print("[Player] blocked: cooldown")
 		return
+	if melee_hitbox == null:
+		push_error("[Player] Tried to attack but melee_hitbox is null.")
+		return
+
 	if melee_hitbox == null:
 		push_error("[Player] Tried to attack but melee_hitbox is null.")
 		return
@@ -153,11 +189,17 @@ func try_attack() -> void:
 	if debug_combat:
 		print("[Player] attack start (damage=", can_damage, ")")
 
+	if debug_combat:
+		print("[Player] attack start")
+
 	await get_tree().create_timer(attack_duration).timeout
 	if not is_alive or not is_inside_tree():
 		return
 
 	# Always turn off after window
+	if not is_alive or not is_inside_tree():
+		return
+
 	melee_hitbox.set_active(false)
 
 	_attacking = false
@@ -168,9 +210,15 @@ func try_attack() -> void:
 	else:
 		_play_anim("idle_right" if facing == Facing.RIGHT else "idle_left")
 
+	if debug_combat:
+		print("[Player] attack end")
+
 	await get_tree().create_timer(attack_cooldown).timeout
 	if not is_alive or not is_inside_tree():
 		return
+	if not is_alive or not is_inside_tree():
+		return
+
 	_can_attack = true
 
 func reset_after_respawn() -> void:
@@ -184,11 +232,18 @@ func reset_after_respawn() -> void:
 
 	if debug_combat:
 		print("[Player] respawned")
+	if melee_hitbox:
+		melee_hitbox.set_active(false)
+
+	if debug_combat:
+		print("[Player] respawned")
 
 func _on_died() -> void:
 	is_alive = false
 	_attacking = false
 	_can_attack = false
+	if melee_hitbox:
+		melee_hitbox.set_active(false)
 	if melee_hitbox:
 		melee_hitbox.set_active(false)
 	velocity = Vector2.ZERO
@@ -216,3 +271,18 @@ func _play_anim(name: String) -> void:
 	if anim.current_animation == name and anim.is_playing():
 		return
 	anim.play(name)
+
+	if debug_combat:
+		print("[Player] died")
+
+	died.emit() # REQUIRED so GameRoot respawns
+
+### Light debug ###
+
+func _on_layer_changed(layer: int) -> void:
+	if not debug_layers:
+		return
+	if layer == _last_layer:
+		return
+	_last_layer = layer
+	print("[Player] layer=", layer)

@@ -16,7 +16,6 @@ func _ready() -> void:
 	melee_hitbox.target_group = &"player"
 	melee_hitbox.set_active(false)
 	hurt_sfx_key = &"ghost_hurt"
-
 	var p := get_tree().get_first_node_in_group("player") as Node2D
 	if p:
 		set_target(p)

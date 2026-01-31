@@ -12,21 +12,27 @@ signal died()
 @onready var melee_hitbox: Hitbox = $Hitbox
 
 var _can_attack: bool = true
+var is_alive: bool = true
 
 func _ready() -> void:
 	add_to_group("player")
 	health.died.connect(_on_died)
-
-	# Make sure hitbox starts off
 	melee_hitbox.set_active(false)
 
 func _physics_process(delta: float) -> void:
+	if not is_alive:
+		return
 	_handle_layer_hotkeys()
 	_handle_movement(delta)
 
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if not is_alive:
+		return
 	if event.is_action_pressed("attack"):
 		try_attack()
+
 
 func _handle_layer_hotkeys() -> void:
 	if Input.is_action_just_pressed("layer_1"):
@@ -51,7 +57,9 @@ func _handle_movement(_delta: float) -> void:
 ### Combat and death ###
 
 func try_attack() -> void:
-	# Optional: disable attacks when mask off
+	if not is_alive:
+		return
+
 	if LevelManager.current_layer == LevelManager.Layer.MASK_OFF:
 		return
 	if not _can_attack:
@@ -60,7 +68,6 @@ func try_attack() -> void:
 	_can_attack = false
 	melee_hitbox.set_active(true)
 
-	# In a jam this is fine; later you can use AnimationPlayer not awaits.
 	await get_tree().create_timer(attack_duration).timeout
 	melee_hitbox.set_active(false)
 
@@ -68,7 +75,12 @@ func try_attack() -> void:
 	_can_attack = true
 
 func reset_after_respawn() -> void:
+	is_alive = true
+	_can_attack = true
 	health.reset_full()
 
 func _on_died() -> void:
-	died.emit()
+	is_alive = false
+	_can_attack = false
+	melee_hitbox.set_active(false)
+	velocity = Vector2.ZERO

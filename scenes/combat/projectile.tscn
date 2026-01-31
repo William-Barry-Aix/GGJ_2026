@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://lbavaswu5gnq"]
+
+[ext_resource type="Script" uid="uid://c1ajcl4678qnx" path="res://scenes/combat/projectile.gd" id="1_de2h6"]
+[ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="2_ptxme"]
+[ext_resource type="Texture2D" uid="uid://3kkfognvmxhx" path="res://assets/art/sprites/mobs/laser.png" id="3_s7a20"]
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_de2h6")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_ptxme")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_s7a20")

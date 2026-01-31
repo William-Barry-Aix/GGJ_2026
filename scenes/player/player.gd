@@ -28,7 +28,11 @@ func _physics_process(delta: float) -> void:
 		return
 	_handle_layer_hotkeys()
 	_handle_movement(delta)
-
+	if get_slide_collision_count() > 0:
+		for i in range(get_slide_collision_count()):
+			var c := get_slide_collision(i)
+			var col := c.get_collider()
+			#print("COLLIDER: ", col, " type=", col.get_class())
 
 
 func _unhandled_input(event: InputEvent) -> void:

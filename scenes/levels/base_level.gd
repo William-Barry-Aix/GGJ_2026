@@ -13,9 +13,6 @@ func _enter_tree() -> void:
 @onready var holes_blue: TileMapLayer = get_node_or_null("HolesBlue") as TileMapLayer
 
 var _base_collision_layer: int = 0
-var _walls_green_base_collision_layer: int = 1
-var _spikes_red_base_collision_layer: int = 2
-var _holes_blue_base_collision_layer: int = 3
 var _active_collision_layer: int = 0
 func _ready() -> void:
 	if not LevelManager.layer_changed.is_connected(on_layer_changed):
@@ -58,17 +55,20 @@ func _color_for_layer(layer: int) -> Color:
 			return Color(1, 1, 1, 1)
 
 func _update_tilemaps_for_layer(layer: int) -> void:
-	_set_tilemap_active(walls_green, layer == LevelManager.Layer.GREEN, _walls_green_base_collision_layer)
-	_set_tilemap_active(spikes_red, layer == LevelManager.Layer.RED, _spikes_red_base_collision_layer)
-	_set_tilemap_active(holes_blue, layer == LevelManager.Layer.BLUE, _holes_blue_base_collision_layer)
+	_set_tilemap_active(walls_green, layer == LevelManager.Layer.GREEN)
+	_set_tilemap_active(spikes_red, layer == LevelManager.Layer.RED)
+	_set_tilemap_active(holes_blue, layer == LevelManager.Layer.BLUE)
 
-func _set_tilemap_active(tilemap: TileMapLayer, is_active: bool, base_collision_layer: int) -> void:
+func _set_tilemap_active(tilemap: TileMapLayer, is_active: bool) -> void:
 	if tilemap == null:
 		return
 
-	if is_active:
-		tilemap.visible = true
-		_active_collision_layer = base_collision_layer
+	tilemap.visible = is_active
 
+	# This property exists in some Godot 4 builds
+	if tilemap.has_method("set_collision_enabled"):
+		tilemap.call_deferred("set_collision_enabled", is_active)
+	elif "collision_enabled" in tilemap:
+		tilemap.set_deferred("collision_enabled", is_active)
 	else:
-		tilemap.visible = false
+		push_warning("[BaseLevel] TileMapLayer has no collision toggle API in this version.")

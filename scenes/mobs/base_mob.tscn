@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://xgg8sv68o3vr"]
+[gd_scene load_steps=6 format=3 uid="uid://xgg8sv68o3vr"]
 
 [ext_resource type="Script" uid="uid://d4j6yek85dohu" path="res://scenes/mobs/base_mob.gd" id="1_lyppj"]
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="2_nwr1u"]
 [ext_resource type="PackedScene" uid="uid://cuxfiydo0jxbj" path="res://scenes/combat/hurtbox.tscn" id="3_kvb4j"]
 [ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_2te0t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwr1u"]
 
 [node name="BaseMob" type="CharacterBody2D"]
 collision_layer = 4
@@ -11,6 +13,12 @@ collision_mask = 3
 script = ExtResource("1_lyppj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(125, -159)
+sprite_frames = SubResource("SpriteFrames_nwr1u")
+offset = Vector2(-125, 159)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

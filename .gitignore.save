@@ -4,10 +4,7 @@
 
 # Godot-specific ignores
 *.import/
-*.import~
-*.import.bak
-assets/**/**/*.import
-*/*.import
+»ø*/*.import
 /export/
 /exports/
 export.cfg

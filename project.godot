@@ -19,6 +19,7 @@ config/icon="res://assets/art/sprites/ui/icon.svg"
 
 LevelManager="*res://autoload/level_manager.gd"
 PortalManager="*res://autoload/portal_manager.gd"
+GameConfig="*res://autoload/game_config.gd"
 
 [global_group]
 

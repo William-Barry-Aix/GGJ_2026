@@ -13,6 +13,8 @@ class_name Hitbox
 var _hit_this_activation: Dictionary = {}
 
 func _ready() -> void:
+	collision_layer = GameConfig.LAYER_HITBOX
+	collision_mask  = GameConfig.LAYER_HURTBOX
 	monitoring = active
 	area_entered.connect(_on_area_entered)
 

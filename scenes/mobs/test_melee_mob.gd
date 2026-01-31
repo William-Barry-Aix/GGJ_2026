@@ -20,6 +20,8 @@ func _ready() -> void:
 		set_target(p)
 
 func _physics_process(delta: float) -> void:
+	if not is_alive:
+		return
 	if target == null:
 		return
 
@@ -37,6 +39,8 @@ func _physics_process(delta: float) -> void:
 		_attack()
 
 func _attack() -> void:
+	if not is_alive:
+		return
 	_can_attack = false
 
 	# Optional: play anim / telegraph during windup

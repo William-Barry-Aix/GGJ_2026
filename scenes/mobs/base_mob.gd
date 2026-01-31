@@ -8,6 +8,7 @@ class_name BaseMob
 @onready var agent: NavigationAgent2D = $NavigationAgent2D if has_node("NavigationAgent2D") else null
 
 var target: Node2D = null
+var is_alive: bool = true
 
 func _ready() -> void:
 	add_to_group("mob")
@@ -38,5 +39,12 @@ func _move_towards_target() -> void:
 
 	move_and_slide()
 
+
 func _on_died() -> void:
+	# Immediately stop behavior this frame
+	is_alive = false
+	set_physics_process(false)
+	set_process(false)
+
+	# If you have hitboxes/attacks, child classes can override to disable them too
 	queue_free()

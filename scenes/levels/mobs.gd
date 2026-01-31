@@ -5,7 +5,7 @@ const BOLZEUR_NODE := preload("res://scenes/mobs/bolzeur_mob.tscn")
 @onready var projectiles_manager := %ProjectilesManager
 
 func _ready():
-	#_bolzeur_spawn(Vector2(-200, 200))
+	_bolzeur_spawn(Vector2(-200, 200))
 	pass
 
 func _bolzeur_spawn(pos):

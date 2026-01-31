@@ -26,7 +26,7 @@ func set_active(v: bool) -> void:
 		_hit_this_activation.clear()
 
 func _on_area_entered(area: Area2D) -> void:
-	print("[Hitbox] entered by: ", area, " groups=", area.get_groups())
+	#print("[Hitbox] entered by: ", area, " groups=", area.get_groups())
 	if not active:
 		return
 	if not area.is_in_group("hurtbox"):

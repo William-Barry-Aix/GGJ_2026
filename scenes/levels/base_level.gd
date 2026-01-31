@@ -19,6 +19,14 @@ func _exit_tree() -> void:
 	if LevelManager.layer_changed.is_connected(on_layer_changed):
 		LevelManager.layer_changed.disconnect(on_layer_changed)
 
+func get_player_spawn() -> Marker2D:
+	var m := get_node_or_null("Markers/PlayersSpawn") as Marker2D
+	if m == null:
+		# Optional fallback if you rename later
+		m = get_node_or_null("Markers/PlayerSpawn") as Marker2D
+	return m
+
+
 func on_layer_changed(layer: int) -> void:
 	if debug_print_layer:
 		print("[BaseLevel] on_layer_changed -> ", layer)

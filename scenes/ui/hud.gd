@@ -51,6 +51,23 @@ func _exit_tree() -> void:
 	if LevelManager.layer_changed.is_connected(_on_layer_changed):
 		LevelManager.layer_changed.disconnect(_on_layer_changed)
 
+func bind_player(p: Player) -> void:
+	if p == null:
+		return
+	var hp: Health = p.get_node_or_null("Health") as Health
+	if hp == null:
+		push_error("[HUD] Player missing Health node.")
+		return
+
+	# Set initial and subscribe
+	set_health(hp.current_health, hp.max_health)
+	if not hp.changed.is_connected(_on_player_health_changed):
+		hp.changed.connect(_on_player_health_changed)
+
+func _on_player_health_changed(cur: int, maxv: int) -> void:
+	set_health(cur, maxv)
+
+
 
 # -------------------------
 # Public API
@@ -96,7 +113,10 @@ func _apply_healthbar_style() -> void:
 
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = Color(0.25, 0.9, 0.25, 0.95)
-	fill.corner_radius_all = 8
+	fill.corner_radius_top_left = 8
+	fill.corner_radius_bottom_left = 8
+	fill.corner_radius_top_right = 8
+	fill.corner_radius_bottom_right = 8
 
 
 	health_bar.add_theme_stylebox_override("background", bg)

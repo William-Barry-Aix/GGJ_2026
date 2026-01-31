@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjxn5c0nf7gwm"]
+[gd_scene load_steps=8 format=3 uid="uid://bjxn5c0nf7gwm"]
 
 [ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_l27cy"]
 [ext_resource type="Script" uid="uid://bd5i2yb4p7tao" path="res://scenes/mobs/bolzeur.gd" id="2_24vju"]
 [ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="2_213k8"]
+[ext_resource type="AudioStream" uid="uid://cmt4ndpgmo26o" path="res://SFX/Bolzeur/bolzeur_attack.mp3" id="4_hxt15"]
+[ext_resource type="AudioStream" uid="uid://b34u0f4cmcjts" path="res://SFX/Bolzeur/Bolzeur_walk.mp3" id="5_2hksd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
 radius = 14.0
@@ -12,7 +14,6 @@ radius = 17.691805
 
 [node name="Bolzeur" instance=ExtResource("1_l27cy")]
 rotation = 0.8883726
-collision_layer = 4
 collision_mask = 11
 script = ExtResource("2_24vju")
 
@@ -38,6 +39,12 @@ health_path = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_24vju")
+
+[node name="bolzeur_attack" type="AudioStreamPlayer2D" parent="." index="7"]
+stream = ExtResource("4_hxt15")
+
+[node name="bolzeur_walk" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("5_2hksd")
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

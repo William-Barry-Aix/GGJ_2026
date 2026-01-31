@@ -45,6 +45,7 @@ func _attack() -> void:
 
 	# Optional: play anim / telegraph during windup
 	await get_tree().create_timer(attack_windup).timeout
+	if not is_alive or not is_inside_tree(): return
 
 	melee_hitbox.set_active(true)
 	await get_tree().create_timer(attack_active).timeout

@@ -24,6 +24,7 @@ config/icon="res://assets/art/sprites/ui/icon.svg"
 LevelManager="*res://autoload/level_manager.gd"
 PortalManager="*res://autoload/portal_manager.gd"
 Music0="*res://scenes/Music/music_0.tscn"
+GameConfig="*res://autoload/game_config.gd"
 
 [global_group]
 
@@ -83,7 +84,8 @@ attack={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Mob"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Mob"
 2d_physics/layer_4="Hurtbox"
 2d_physics/layer_5="Hitbox"

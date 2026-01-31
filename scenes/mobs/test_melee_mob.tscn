@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpj8netckrean"]
+[gd_scene load_steps=7 format=3 uid="uid://cpj8netckrean"]
 
 [ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_00bge"]
 [ext_resource type="Script" uid="uid://b8ftr2rcpxl7r" path="res://scenes/mobs/test_melee_mob.gd" id="2_4j4vy"]
 [ext_resource type="Texture2D" uid="uid://bhvxy481i7bbq" path="res://assets/art/sprites/mobs/ghost.png" id="3_j7msf"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6yq"]
+radius = 37.0
+height = 96.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7msf"]
-radius = 39.0
-height = 132.0
+radius = 53.0
+height = 152.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7msf"]
 size = Vector2(132, 154)
@@ -22,10 +26,15 @@ attack_cooldown = 0.6
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_j7msf")
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1, -7)
+shape = SubResource("CapsuleShape2D_ix6yq")
+
 [node name="Hurtbox" parent="." index="4"]
 health_path = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_j7msf")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]

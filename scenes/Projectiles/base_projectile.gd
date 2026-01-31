@@ -1,12 +1,12 @@
 extends Area2D
-class_name Projectile
+class_name BaseProjectile
 
 @export var speed: float = 420.0
 @export var lifetime: float = 2.0
 
 @onready var hitbox: Hitbox = $Hitbox
 
-var velocity: Vector2 = Vector2.ZERO
+var direction: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
 	hitbox.set_active(true)
@@ -14,4 +14,4 @@ func _ready() -> void:
 	queue_free()
 
 func _physics_process(delta: float) -> void:
-	global_position += velocity * delta
+	global_position += direction.normalized() * speed * delta

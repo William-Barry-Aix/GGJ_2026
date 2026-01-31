@@ -12,6 +12,7 @@ var is_alive: bool = true
 
 func _ready() -> void:
 	add_to_group("mob")
+	GameConfig.setup_mob_body(self)
 	health.died.connect(_on_died)
 
 func set_target(t: Node2D) -> void:

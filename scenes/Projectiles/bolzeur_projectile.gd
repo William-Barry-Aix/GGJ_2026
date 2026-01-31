@@ -1,0 +1,2 @@
+extends BaseProjectile
+class_name BolzeurProjectile

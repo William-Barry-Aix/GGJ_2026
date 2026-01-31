@@ -2,12 +2,13 @@ extends Area2D
 class_name Hurtbox
 
 @export var health_path: NodePath
-@export var debug_print: bool = false
-
 @onready var health: Health = get_node_or_null(health_path) as Health
+
+@export var debug_print: bool = false
 
 func _ready() -> void:
 	add_to_group("hurtbox")
+	GameConfig.setup_hurtbox(self)
 	if health == null:
 		push_error("[Hurtbox] Missing Health reference. Set health_path in inspector.")
 

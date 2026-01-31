@@ -1,49 +1,87 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnx8flce3g5qd"]
+[gd_scene load_steps=15 format=3 uid="uid://dnx8flce3g5qd"]
 
-[ext_resource type="Script" uid="uid://botch64ia08bc" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://brahheldaik8m" path="res://assets/art/sprites/player/placeholder_player_2.png" id="2_dovo2"]
-[ext_resource type="PackedScene" uid="uid://cuxfiydo0jxbj" path="res://scenes/combat/hurtbox.tscn" id="3_lvxji"]
-[ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_p47bc"]
-[ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_je7p5"]
+[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="2_fm80t"]
+[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="3_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="4_ugbui"]
+[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="5_fcs02"]
+[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="6_myrg7"]
+[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="7_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="8_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="9_lgqa7"]
+[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="10_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="11_3j4b4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
-radius = 39.012817
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ugbui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fcs02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kvlxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uf5tr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lgqa7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3j4b4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
-radius = 54.037025
+[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
+radius = 34.058773
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p47bc"]
-size = Vector2(237, 145)
+[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
+radius = 46.010868
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 2
-collision_mask = 5
-script = ExtResource("1_8afob")
+[node name="BolzeurMob" instance=ExtResource("1_je7p5")]
+collision_mask = 11
+script = ExtResource("2_fm80t")
+hurt_sfx_key = &"bolzeur_hurt"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_dovo2")
+[node name="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+texture = ExtResource("3_gx1jg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_75vfm")
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_iw5st")
+autoplay = "default"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_213k8")
 
-[node name="Hurtbox" parent="." instance=ExtResource("3_lvxji")]
+[node name="NavigationAgent2D" parent="." index="3"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
+
+[node name="RayCastContainer" type="Node" parent="." index="4"]
+unique_name_in_owner = true
+
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
 health_path = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_p47bc")
-
-[node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
-target_group = &"mob"
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_p47bc")
-
-[node name="Health" parent="." instance=ExtResource("5_p47bc")]
+shape = SubResource("CircleShape2D_24vju")
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

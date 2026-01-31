@@ -1,41 +1,87 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhdna0g1wnc35"]
+[gd_scene load_steps=15 format=3 uid="uid://bhdna0g1wnc35"]
 
-[ext_resource type="Script" uid="uid://csvantjxsvsqn" path="res://scenes/root/game_root.gd" id="1_oamxu"]
-[ext_resource type="PackedScene" uid="uid://dnx8flce3g5qd" path="res://scenes/player/player.tscn" id="2_2eikp"]
-[ext_resource type="PackedScene" uid="uid://dlqeifrqd8kjf" path="res://scenes/levels/test_level_main.tscn" id="3_orhnb"]
-[ext_resource type="PackedScene" uid="uid://bv20wuwjym7re" path="res://scenes/ui/hud.tscn" id="3_q82se"]
-[ext_resource type="AudioStream" uid="uid://cviue08oru0gv" path="res://SFX/Io/io_walk.mp3" id="5_orhnb"]
-[ext_resource type="AudioStream" uid="uid://b8af6cux7s6g4" path="res://SFX/Io/sword/sword1.mp3" id="5_wawad"]
-[ext_resource type="AudioStream" uid="uid://c1it4qgy27vqd" path="res://SFX/Io/sword/sword2.mp3" id="6_hycv4"]
-[ext_resource type="AudioStream" uid="uid://vtlhc1t1evne" path="res://SFX/Io/sword/sword3.mp3" id="7_l3qgr"]
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_kwrmo"]
+[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="2_kb3ya"]
+[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="3_3oev2"]
+[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="4_q7cfn"]
+[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="5_hbp06"]
+[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="6_wbsy8"]
+[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="7_wvkie"]
+[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="8_ln7rt"]
+[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="9_kfbpc"]
+[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="10_w5b1c"]
+[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="11_0mvcr"]
 
-[node name="GameRoot" type="Node"]
-script = ExtResource("1_oamxu")
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q7cfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hbp06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wbsy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvkie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ln7rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kfbpc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w5b1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0mvcr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
-[node name="World" type="Node2D" parent="."]
+[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
+radius = 34.058773
 
-[node name="TestLevel" parent="World" instance=ExtResource("3_orhnb")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
+radius = 46.010868
 
-[node name="Player" parent="World" instance=ExtResource("2_2eikp")]
-position = Vector2(-924, 202)
+[node name="BolzeurMob" instance=ExtResource("1_kwrmo")]
+collision_mask = 11
+script = ExtResource("2_kb3ya")
+hurt_sfx_key = &"bolzeur_hurt"
 
-[node name="io_walk" type="AudioStreamPlayer2D" parent="World/Player"]
-stream = ExtResource("5_orhnb")
+[node name="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+texture = ExtResource("3_3oev2")
 
-[node name="io_sword_sfx" type="Node2D" parent="World/Player"]
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_iw5st")
+autoplay = "default"
 
-[node name="io_sword1" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
-stream = ExtResource("5_wawad")
-bus = &"SFX"
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_213k8")
 
-[node name="io_sword2" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
-stream = ExtResource("6_hycv4")
-bus = &"SFX"
+[node name="NavigationAgent2D" parent="." index="3"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
 
-[node name="io_sword3" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
-stream = ExtResource("7_l3qgr")
-bus = &"SFX"
+[node name="RayCastContainer" type="Node" parent="." index="4"]
+unique_name_in_owner = true
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
+health_path = NodePath("../Health")
 
-[node name="HUD" parent="UI" instance=ExtResource("3_q82se")]
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_24vju")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

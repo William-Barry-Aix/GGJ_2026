@@ -10,9 +10,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(596, -157, 600, 169, -4
 
 [node name="FelixTestLevel" instance=ExtResource("1_bswqx")]
 
-[node name="NavigationRegion2D" parent="Navigation" index="0"]
-navigation_polygon = SubResource("NavigationPolygon_bswqx")
-
-[node name="SpaceshipPlaceholder" type="Sprite2D" parent="." index="4"]
+[node name="SpaceshipPlaceholder" type="Sprite2D" parent="." index="0"]
 position = Vector2(20, 37)
 texture = ExtResource("2_l2ppn")
+
+[node name="NavigationRegion2D" parent="Navigation" index="0"]
+navigation_polygon = SubResource("NavigationPolygon_bswqx")

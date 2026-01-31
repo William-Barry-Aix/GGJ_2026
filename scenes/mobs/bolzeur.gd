@@ -2,32 +2,34 @@ extends CharacterBody2D
 
 @onready var nav2d := %NavigationAgent2D
 
+#const bolzeur_projectile := preload("res://scenes/Projectiles/bolzeur_projectile.tscn")
+#const base_level := preload("res://scenes/levels/base_level.tscn")
+
 @export var speed := 60
 
-const CHARGING_TIME = 4.0
-const CHASING_TIME = 6.0
+const CHARGING_TIME = 3.0
+const CHASING_TIME = 5.0
 const RESTING_TIME = 1.0
+const PROJECTILES_NBR = 25.0
 
 enum bolzeur_state {idle, chasing, charging, resting}
 
-var cur_state := bolzeur_state.chasing
+var cur_state := bolzeur_state.charging
 var phase_timer := 0.0
+
+signal bolzeur_attack(pos,projectiles_nbr)
 
 func _physics_process(delta: float) -> void:
 	phase_timer += delta
 	update_timer()
 	match cur_state:
 		bolzeur_state.idle:
-			print("idle")
 			return
 		bolzeur_state.chasing:
-			print("chasing")
 			navigate(delta)
 		bolzeur_state.charging:
-			print("charging")
 			charging()
 		bolzeur_state.resting:
-			print("resting")
 			resting()
 
 # For debug purposes
@@ -51,12 +53,14 @@ func resting():
 
 func send_attack():
 	print("Sending attack!")
+	bolzeur_attack.emit(position, PROJECTILES_NBR)
 
 func update_timer():
 	if cur_state == bolzeur_state.charging && phase_timer >= CHARGING_TIME:
 		print("Charging done!")
 		cur_state = bolzeur_state.resting
 		phase_timer = 0.0
+		send_attack()
 	elif cur_state == bolzeur_state.chasing && phase_timer >= CHASING_TIME:
 		print("Chasing done!")
 		cur_state = bolzeur_state.charging

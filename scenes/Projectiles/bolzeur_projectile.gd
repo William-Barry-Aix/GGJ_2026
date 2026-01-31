@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-const speed := 700
+const speed := 8000
 
-var direction := Vector2(0,0)
+var direction : Vector2
 
 func _process(delta):
-	var velocity = direction * speed * delta
+	velocity = direction * speed * delta
 	move_and_slide()

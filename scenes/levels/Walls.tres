@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d0bd7spd25lhd"]
+
+[ext_resource type="Texture2D" uid="uid://dmn0ue746fykg" path="res://assets/art/sprites/tilesets/spaceship_placeholder - Copie.png" id="1_em2rc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v45ci"]
+texture = ExtResource("1_em2rc")
+margins = Vector2i(101, 94)
+texture_region_size = Vector2i(127, 245)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -62, 64, -62, 64, 62, -64, 62)
+
+[resource]
+tile_size = Vector2i(128, 124)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_v45ci")

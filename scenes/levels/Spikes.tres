@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dr6jhgfmmet8i"]
+
+[ext_resource type="Texture2D" uid="uid://ceuxchy8bwot5" path="res://assets/art/sprites/tilesets/laser_frame1.png" id="1_dnlrp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6xh4u"]
+texture = ExtResource("1_dnlrp")
+separation = Vector2i(33, 0)
+texture_region_size = Vector2i(560, 876)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+
+[resource]
+tile_size = Vector2i(536, 416)
+sources/0 = SubResource("TileSetAtlasSource_6xh4u")

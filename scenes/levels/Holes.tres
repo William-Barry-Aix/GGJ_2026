@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://br3e7qktyh2pt"]
+
+[ext_resource type="Texture2D" uid="uid://b83pisbmvo1oi" path="res://assets/art/sprites/tilesets/holes.png" id="1_x74d4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_48ne7"]
+texture = ExtResource("1_x74d4")
+margins = Vector2i(36, 36)
+texture_region_size = Vector2i(125, 125)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(126, 124)
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_48ne7")

@@ -1,10 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlqeifrqd8kjf"]
+[gd_scene load_steps=5 format=3 uid="uid://dlqeifrqd8kjf"]
 
 [ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_jbqir"]
 [ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_yautc"]
+[ext_resource type="PackedScene" uid="uid://cpj8netckrean" path="res://scenes/mobs/test_melee_mob.tscn" id="3_fr1um"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yautc"]
+vertices = PackedVector2Array(1410.0234, -599.0703, 1412.9688, 665.96094, -1389.8516, 655.03125, -1371.1406, -619.9219)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1381, -630, 1420, -609, 1423, 676, -1400, 665)])
 
 [node name="TestLevel" instance=ExtResource("1_jbqir")]
 
+[node name="NavigationRegion2D" parent="Navigation" index="0"]
+navigation_polygon = SubResource("NavigationPolygon_yautc")
+
+[node name="PlayerSpawn" parent="Markers" index="0"]
+position = Vector2(-999, 212)
+
 [node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+position = Vector2(-1, -2)
 scale = Vector2(2, 2)
 texture = ExtResource("2_yautc")
+
+[node name="TestMeleeMob" parent="Entities/Mobs" index="0" instance=ExtResource("3_fr1um")]
+position = Vector2(-582, 201)
+collision_layer = 1

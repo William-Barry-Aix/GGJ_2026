@@ -1,59 +1,55 @@
 extends Node
 class_name GameRoot
 
-#Define variables for the World, CurrentLevel and Player (both under Node)
-@export var player_scene: PackedScene
-@export var initial_level_scene: PackedScene
+@export var debug_print: bool = false
 
-var world: Node
+@onready var world: Node = $World
+@onready var player: Player = $World/Player
+
 var current_level: BaseLevel
-var player: Player
 
 func _ready() -> void:
-	world = Node.new()
-	world.name = "World"
-	add_child(world)
 	LevelManager.set_layer(LevelManager.Layer.MASK_OFF)
-	load_level(initial_level_scene)
 
-
-#TODO: Define how we'll load/unload the levels
-func load_level(level_scene: PackedScene) -> void:
-	# Unload old
-	if is_instance_valid(current_level):
-		current_level.queue_free()
-		current_level = null
-
-	# Load new
-	if level_scene == null:
-		push_error("[GameRoot] No level scene provided.")
+	if world == null:
+		push_error("[GameRoot] Missing node: World")
 		return
 
-	current_level = level_scene.instantiate() as BaseLevel
-	world.add_child(current_level)
-
-	_spawn_player()
-
-	# Apply current layer immediately (so visuals match when loading)
-	current_level.on_layer_changed(LevelManager.current_layer)
-
-	
-
-#Used when loading the scene for the first time, or when the player dies
-func _spawn_player() -> void:
-	if player_scene == null:
-		push_error("[GameRoot] No player_scene provided.")
+	current_level = get_tree().get_first_node_in_group("level") as BaseLevel
+	if current_level == null:
+		current_level = _find_level_under_world(world)
+	if current_level == null:
+		push_error("[GameRoot] No BaseLevel found under World. Add a level scene that extends BaseLevel.")
 		return
 
-	if is_instance_valid(player):
-		player.queue_free()
+	if player == null:
+		push_error("[GameRoot] Missing node: World/Player")
+		return
 
-	player = player_scene.instantiate() as Player
-	world.add_child(player)
+	if debug_print:
+		print("[GameRoot] Ready. Level=", current_level.name, " Player=", player.name)
 
-	# Optional: spawn point support
-	var spawn := current_level.get_node_or_null("PlayerSpawn") as Node2D
-	if spawn:
-		player.global_position = spawn.global_position
-	else:
-		player.global_position = Vector2.ZERO
+
+func _find_level_under_world(world_node: Node) -> BaseLevel:
+	# Prefer direct children (your current structure: World -> Level)
+	for c in world_node.get_children():
+		if c is BaseLevel:
+			return c as BaseLevel
+
+	# Fallback: search deeper (in case someone nests it)
+	for c in world_node.get_children():
+		var found := _find_level_recursive(c)
+		if found != null:
+			return found
+
+	return null
+
+
+func _find_level_recursive(n: Node) -> BaseLevel:
+	if n is BaseLevel:
+		return n as BaseLevel
+	for c in n.get_children():
+		var found := _find_level_recursive(c)
+		if found != null:
+			return found
+	return null

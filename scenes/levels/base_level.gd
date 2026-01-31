@@ -7,7 +7,16 @@ class_name BaseLevel
 func _enter_tree() -> void:
 	add_to_group("level")
 	LevelManager.layer_changed.connect(on_layer_changed)
+	
+@onready var walls_green: TileMapLayer = get_node_or_null("WallsGreen") as TileMapLayer
+@onready var spikes_red: TileMapLayer = get_node_or_null("SpikesRed") as TileMapLayer
+@onready var holes_blue: TileMapLayer = get_node_or_null("HolesBlue") as TileMapLayer
 
+var _base_collision_layer: int = 0
+var _walls_green_base_collision_layer: int = 1
+var _spikes_red_base_collision_layer: int = 2
+var _holes_blue_base_collision_layer: int = 3
+var _active_collision_layer: int = 0
 func _ready() -> void:
 	if not LevelManager.layer_changed.is_connected(on_layer_changed):
 		LevelManager.layer_changed.connect(on_layer_changed)
@@ -30,9 +39,10 @@ func on_layer_changed(layer: int) -> void:
 
 	if layer_tint == null:
 		push_warning("[BaseLevel] Missing CanvasModulate named 'LayerTint' in this level.")
-		return
+	else:
+		layer_tint.color = _color_for_layer(layer)
 
-	layer_tint.color = _color_for_layer(layer)
+	_update_tilemaps_for_layer(layer)
 
 func _color_for_layer(layer: int) -> Color:
 	match layer:
@@ -46,3 +56,19 @@ func _color_for_layer(layer: int) -> Color:
 			return Color(0.55, 0.70, 1.0, 1)
 		_:
 			return Color(1, 1, 1, 1)
+
+func _update_tilemaps_for_layer(layer: int) -> void:
+	_set_tilemap_active(walls_green, layer == LevelManager.Layer.GREEN, _walls_green_base_collision_layer)
+	_set_tilemap_active(spikes_red, layer == LevelManager.Layer.RED, _spikes_red_base_collision_layer)
+	_set_tilemap_active(holes_blue, layer == LevelManager.Layer.BLUE, _holes_blue_base_collision_layer)
+
+func _set_tilemap_active(tilemap: TileMapLayer, is_active: bool, base_collision_layer: int) -> void:
+	if tilemap == null:
+		return
+
+	if is_active:
+		tilemap.visible = true
+		_active_collision_layer = base_collision_layer
+
+	else:
+		tilemap.visible = false

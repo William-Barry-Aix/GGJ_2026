@@ -26,9 +26,6 @@ func _ready() -> void:
 		push_error("[GameRoot] Missing node: World/Player")
 		return
 
-	# Apply layer once on boot so visuals match immediately
-	current_level.on_layer_changed(LevelManager.current_layer)
-
 	if debug_print:
 		print("[GameRoot] Ready. Level=", current_level.name, " Player=", player.name)
 

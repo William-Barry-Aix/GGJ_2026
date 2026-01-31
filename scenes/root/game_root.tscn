@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhdna0g1wnc35"]
+[gd_scene load_steps=9 format=3 uid="uid://bhdna0g1wnc35"]
 
 [ext_resource type="Script" uid="uid://csvantjxsvsqn" path="res://scenes/root/game_root.gd" id="1_oamxu"]
 [ext_resource type="PackedScene" uid="uid://dnx8flce3g5qd" path="res://scenes/player/player.tscn" id="2_2eikp"]
 [ext_resource type="PackedScene" uid="uid://dlqeifrqd8kjf" path="res://scenes/levels/test_level.tscn" id="2_q82se"]
 [ext_resource type="PackedScene" uid="uid://bv20wuwjym7re" path="res://scenes/ui/hud.tscn" id="3_q82se"]
+[ext_resource type="AudioStream" uid="uid://cviue08oru0gv" path="res://SFX/Io/io_walk.mp3" id="5_orhnb"]
+[ext_resource type="AudioStream" uid="uid://b8af6cux7s6g4" path="res://SFX/Io/sword/sword1.mp3" id="5_wawad"]
+[ext_resource type="AudioStream" uid="uid://c1it4qgy27vqd" path="res://SFX/Io/sword/sword2.mp3" id="6_hycv4"]
+[ext_resource type="AudioStream" uid="uid://vtlhc1t1evne" path="res://SFX/Io/sword/sword3.mp3" id="7_l3qgr"]
 
 [node name="GameRoot" type="Node"]
 script = ExtResource("1_oamxu")
@@ -14,6 +18,23 @@ script = ExtResource("1_oamxu")
 
 [node name="Player" parent="World" instance=ExtResource("2_2eikp")]
 position = Vector2(-924, 202)
+
+[node name="io_walk" type="AudioStreamPlayer2D" parent="World/Player"]
+stream = ExtResource("5_orhnb")
+
+[node name="io_sword_sfx" type="Node2D" parent="World/Player"]
+
+[node name="io_sword1" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
+stream = ExtResource("5_wawad")
+bus = &"SFX"
+
+[node name="io_sword2" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
+stream = ExtResource("6_hycv4")
+bus = &"SFX"
+
+[node name="io_sword3" type="AudioStreamPlayer2D" parent="World/Player/io_sword_sfx"]
+stream = ExtResource("7_l3qgr")
+bus = &"SFX"
 
 [node name="UI" type="CanvasLayer" parent="."]
 

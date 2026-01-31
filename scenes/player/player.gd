@@ -55,6 +55,7 @@ func _handle_movement(_delta: float) -> void:
 	).normalized()
 	velocity = input * move_speed
 	move_and_slide()
+	$io_walk.play()
 
 
 ### Combat and death ###
@@ -70,7 +71,7 @@ func try_attack() -> void:
 
 	_can_attack = false
 	melee_hitbox.set_active(true)
-
+	$io_sword_sfx.PLAYBACK_RANDOM()
 	await get_tree().create_timer(attack_duration).timeout
 	melee_hitbox.set_active(false)
 

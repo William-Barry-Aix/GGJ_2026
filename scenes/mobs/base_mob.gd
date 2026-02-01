@@ -3,6 +3,9 @@ class_name BaseMob
 
 @export var move_speed: float = 120.0
 
+@export var default_anim: StringName = &"default"
+
+@onready var anim: AnimationPlayer = get_node_or_null("AnimationPlayer") as AnimationPlayer
 @onready var health: Health = $Health
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var agent: NavigationAgent2D = $NavigationAgent2D if has_node("NavigationAgent2D") else null
@@ -13,7 +16,24 @@ var is_alive: bool = true
 func _ready() -> void:
 	add_to_group("mob")
 	GameConfig.setup_mob_body(self)
-	health.died.connect(_on_died)
+
+	if health:
+		health.died.connect(_on_died)
+
+	_play_default_anim()
+
+
+func _play_default_anim() -> void:
+	if anim == null:
+		return
+	if default_anim == &"":
+		return
+	if not anim.has_animation(default_anim):
+		push_warning("[BaseMob] AnimationPlayer missing animation '%s' on %s" % [String(default_anim), name])
+		return
+
+	# Ensure it loops (the animation resource itself should also be set to loop in the editor)
+	anim.play(default_anim)
 
 func set_target(t: Node2D) -> void:
 	target = t
@@ -42,10 +62,11 @@ func _move_towards_target() -> void:
 
 
 func _on_died() -> void:
-	# Immediately stop behavior this frame
 	is_alive = false
 	set_physics_process(false)
 	set_process(false)
 
-	# If you have hitboxes/attacks, child classes can override to disable them too
+	if anim:
+		anim.stop()
+
 	queue_free()

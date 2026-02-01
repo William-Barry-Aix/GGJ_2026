@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwtfa7ex186jg"]
+
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_klvpj"]
+[ext_resource type="Texture2D" uid="uid://rcb11ywwvfhe" path="res://assets/art/sprites/mobs/ghost_spritesheet.png" id="2_sawq8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sawq8"]
+radius = 28.0
+height = 78.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iim8q"]
+radius = 37.0
+height = 110.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irank"]
+radius = 47.0
+height = 130.0
+
+[sub_resource type="Animation" id="Animation_sawq8"]
+resource_name = "default"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iim8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_irank"]
+_data = {
+&"RESET": SubResource("Animation_iim8q"),
+&"default": SubResource("Animation_sawq8")
+}
+
+[node name="GhostMob" instance=ExtResource("1_klvpj")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_sawq8")
+hframes = 9
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(2, -2)
+shape = SubResource("CapsuleShape2D_sawq8")
+
+[node name="Hurtbox" parent="." index="4"]
+health_path = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(2, 3)
+shape = SubResource("CapsuleShape2D_iim8q")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_irank")
+
+[node name="AnimationPlayer" parent="." index="6"]
+libraries = {
+&"": SubResource("AnimationLibrary_irank")
+}
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

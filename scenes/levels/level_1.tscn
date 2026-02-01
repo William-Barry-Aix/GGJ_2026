@@ -34,3 +34,6 @@ tile_map_data = PackedByteArray("AAAKAAQAAAASAAkAAAALAA0AAAASAAkAAAA=")
 
 [node name="DoorBlue" parent="Tilemaps" index="8"]
 tile_map_data = PackedByteArray("AADu/+7/AAARAAkAAAA=")
+
+[node name="PlayerSpawn" parent="Markers" index="0"]
+position = Vector2(700, 730)

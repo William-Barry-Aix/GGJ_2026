@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_l27cy"]
 [ext_resource type="Script" uid="uid://bd5i2yb4p7tao" path="res://scenes/mobs/bolzeur.gd" id="2_24vju"]
-[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="2_213k8"]
+[ext_resource type="Texture2D" uid="uid://j33vfgkkr1oy" path="res://assets/art/sprites/mobs/BolzeurSprite.png" id="3_2hksd"]
 [ext_resource type="AudioStream" uid="uid://cmt4ndpgmo26o" path="res://SFX/Bolzeur/bolzeur_attack.mp3" id="4_hxt15"]
 [ext_resource type="AudioStream" uid="uid://b34u0f4cmcjts" path="res://SFX/Bolzeur/Bolzeur_walk.mp3" id="5_2hksd"]
 
@@ -19,7 +19,9 @@ script = ExtResource("2_24vju")
 
 [node name="Sprite2D" parent="." index="0"]
 unique_name_in_owner = true
-texture = ExtResource("2_213k8")
+rotation = -0.8883726
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_2hksd")
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_213k8")

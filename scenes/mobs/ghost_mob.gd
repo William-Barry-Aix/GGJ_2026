@@ -1,37 +1,38 @@
 extends BaseMob
-class_name TestMeleeMob
+class_name GhostMob
 
-@export var attack_range: float = 42.0
+@export var attack_range: float = 44.5
 @export var attack_windup: float = 0.08
 @export var attack_active: float = 0.10
 @export var attack_cooldown: float = 0.60
 
 @onready var melee_hitbox: Hitbox = $Hitbox
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D if has_node("AnimatedSprite2D") else null
 
 var _can_attack: bool = true
 
 func _ready() -> void:
 	super._ready()
+	melee_hitbox.target_group = &"player"
 	melee_hitbox.set_active(false)
-
-	# Auto-target player (simple jam approach)
+	hurt_sfx_key = &"ghost_hurt"
 	var p := get_tree().get_first_node_in_group("player") as Node2D
 	if p:
 		set_target(p)
 
+	if anim:
+		anim.play("default")
+
 func _physics_process(delta: float) -> void:
-	if not is_alive:
-		return
-	if target == null:
+	if not is_alive or target == null:
 		return
 
 	var dist := global_position.distance_to(target.global_position)
 
 	if dist > attack_range:
-		_move_towards_target()
+		_move_towards_target(delta)
 		return
 
-	# In range: stop and swing
 	velocity = Vector2.ZERO
 	move_and_slide()
 
@@ -43,7 +44,6 @@ func _attack() -> void:
 		return
 	_can_attack = false
 
-	# Optional: play anim / telegraph during windup
 	await get_tree().create_timer(attack_windup).timeout
 	if not is_alive or not is_inside_tree(): return
 

@@ -1,64 +1,87 @@
-[gd_scene load_steps=6 format=3 uid="uid://dac228gkovlx8"]
+[gd_scene load_steps=15 format=3 uid="uid://dac228gkovlx8"]
 
-[ext_resource type="Script" uid="uid://xq04gdich1ih" path="res://scenes/levels/base_level.gd" id="1_md458"]
-[ext_resource type="TileSet" uid="uid://bqgftmy84st4j" path="res://scenes/levels/Spaceship.tres" id="2_o1chu"]
-[ext_resource type="Script" uid="uid://dtb5mmd8f3c56" path="res://scenes/levels/projectiles_manager.gd" id="2_uk53i"]
-[ext_resource type="Script" uid="uid://cj83gmv5ur6xp" path="res://scenes/levels/mobs.gd" id="2_ukglk"]
-[ext_resource type="PackedScene" uid="uid://bs1oyk7lsljrk" path="res://scenes/Projectiles/bolzeur_projectile.tscn" id="4_wwrw0"]
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_qhwlw"]
+[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="2_0caop"]
+[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="3_bd4s6"]
+[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="4_1vfnp"]
+[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="5_575cj"]
+[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="6_i5apv"]
+[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="7_j8xgc"]
+[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="8_ovmjf"]
+[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="9_mwefk"]
+[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="10_jua6e"]
+[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="11_vtnee"]
 
-[node name="BaseLevel" type="Node2D"]
-script = ExtResource("1_md458")
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1vfnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_575cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5apv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j8xgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ovmjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mwefk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jua6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vtnee")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
-[node name="Background" type="Sprite2D" parent="."]
+[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
+radius = 34.058773
 
-[node name="Tilemaps" type="Node2D" parent="."]
+[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
+radius = 46.010868
 
-[node name="Walls" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
+[node name="BolzeurMob" instance=ExtResource("1_qhwlw")]
+collision_mask = 11
+script = ExtResource("2_0caop")
+hurt_sfx_key = &"bolzeur_hurt"
 
-[node name="Ground" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="HolesBlue" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="WallsGreen" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="SpikesRed" type="TileMapLayer" parent="Tilemaps"]
-
-[node name="props" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="DoorGreen" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="DoorRed" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="DoorBlue" type="TileMapLayer" parent="Tilemaps"]
-tile_set = ExtResource("2_o1chu")
-
-[node name="LayerTint" type="CanvasModulate" parent="."]
-
-[node name="Navigation" type="Node2D" parent="."]
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
-
-[node name="Markers" type="Node2D" parent="."]
-
-[node name="PlayerSpawn" type="Marker2D" parent="Markers"]
-
-[node name="Entities" type="Node2D" parent="."]
-
-[node name="Mobs" type="Node2D" parent="Entities"]
-script = ExtResource("2_ukglk")
-
-[node name="Props" type="Node2D" parent="Entities"]
-
-[node name="Interactables" type="Node2D" parent="Entities"]
-
-[node name="ProjectilesManager" type="Node2D" parent="Entities"]
+[node name="Sprite2D" parent="." index="0"]
 unique_name_in_owner = true
-script = ExtResource("2_uk53i")
-bolzeur_projectile_scene = ExtResource("4_wwrw0")
+texture = ExtResource("3_bd4s6")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_iw5st")
+autoplay = "default"
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_213k8")
+
+[node name="NavigationAgent2D" parent="." index="3"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
+
+[node name="RayCastContainer" type="Node" parent="." index="4"]
+unique_name_in_owner = true
+
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
+health_path = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_24vju")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

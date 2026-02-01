@@ -1,27 +1,87 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlqeifrqd8kjf"]
+[gd_scene load_steps=15 format=3 uid="uid://dlqeifrqd8kjf"]
 
-[ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_jbqir"]
-[ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_yautc"]
-[ext_resource type="PackedScene" uid="uid://cpj8netckrean" path="res://scenes/mobs/test_melee_mob.tscn" id="3_fr1um"]
+[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_x28p0"]
+[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="2_tyuvy"]
+[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="3_y6ntl"]
+[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="4_web7c"]
+[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="5_x8ryb"]
+[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="6_5m0wy"]
+[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="7_3srki"]
+[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="8_inj2s"]
+[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="9_y8j10"]
+[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="10_kiywo"]
+[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="11_rfmsb"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_yautc"]
-vertices = PackedVector2Array(1410.0234, -599.0703, 1412.9688, 665.96094, -1389.8516, 655.03125, -1371.1406, -619.9219)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1381, -630, 1420, -609, 1423, 676, -1400, 665)])
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_web7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x8ryb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5m0wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3srki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_inj2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y8j10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kiywo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rfmsb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
-[node name="TestLevel" instance=ExtResource("1_jbqir")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
+radius = 34.058773
 
-[node name="NavigationRegion2D" parent="Navigation" index="0"]
-navigation_polygon = SubResource("NavigationPolygon_yautc")
+[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
+radius = 46.010868
 
-[node name="PlayerSpawn" parent="Markers" index="0"]
-position = Vector2(-999, 212)
+[node name="BolzeurMob" instance=ExtResource("1_x28p0")]
+collision_mask = 11
+script = ExtResource("2_tyuvy")
+hurt_sfx_key = &"bolzeur_hurt"
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
-position = Vector2(-1, -2)
-scale = Vector2(2, 2)
-texture = ExtResource("2_yautc")
+[node name="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+texture = ExtResource("3_y6ntl")
 
-[node name="TestMeleeMob" parent="Entities/Mobs" index="0" instance=ExtResource("3_fr1um")]
-position = Vector2(-582, 201)
-collision_layer = 1
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_iw5st")
+autoplay = "default"
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_213k8")
+
+[node name="NavigationAgent2D" parent="." index="3"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
+
+[node name="RayCastContainer" type="Node" parent="." index="4"]
+unique_name_in_owner = true
+
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
+health_path = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_24vju")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

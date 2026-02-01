@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2137g1a46ja"]
+
+[ext_resource type="Script" uid="uid://cucpur216ea56" path="res://Music/sound_manager.gd" id="1_s1nio"]
+[ext_resource type="AudioStream" uid="uid://b8af6cux7s6g4" path="res://SFX/Io/sword/sword1.mp3" id="2_uymoy"]
+[ext_resource type="AudioStream" uid="uid://c1it4qgy27vqd" path="res://SFX/Io/sword/sword2.mp3" id="3_qk6ur"]
+[ext_resource type="AudioStream" uid="uid://h6lei175pgw3" path="res://SFX/Io/damage/damage1.mp3" id="4_86tcm"]
+[ext_resource type="AudioStream" uid="uid://ddqty200ke1qd" path="res://SFX/Io/damage/damage2.mp3" id="5_rcyps"]
+[ext_resource type="AudioStream" uid="uid://biayw582dxs5y" path="res://SFX/Io/damage/damage3.mp3" id="6_wo5i2"]
+[ext_resource type="AudioStream" uid="uid://b6dr4sytvxc50" path="res://SFX/Io/damage/damage4.mp3" id="7_8uud4"]
+[ext_resource type="AudioStream" uid="uid://bc0luopnr56xb" path="res://SFX/Io/damage/damage5.mp3" id="8_vjs6e"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_s1nio")
+library = {
+"mask_toggle": [],
+"mob_attack": [],
+"mob_charge": [],
+"mob_hurt": [],
+"player_hurt": [ExtResource("4_86tcm"), ExtResource("5_rcyps"), ExtResource("6_wo5i2"), ExtResource("7_8uud4"), ExtResource("8_vjs6e")],
+"player_swing": [ExtResource("2_uymoy"), ExtResource("3_qk6ur")]
+}

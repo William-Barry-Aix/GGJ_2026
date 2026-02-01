@@ -1,8 +1,9 @@
 extends CharacterBody2D
 class_name BaseMob
 
-@export var move_speed: float = 120.0
+signal mob_died(mob: BaseMob)
 
+@export var move_speed: float = 120.0
 @export var default_anim: StringName = &"default"
 
 @onready var anim: AnimationPlayer = get_node_or_null("AnimationPlayer") as AnimationPlayer
@@ -68,5 +69,7 @@ func _on_died() -> void:
 
 	if anim:
 		anim.stop()
+
+	mob_died.emit(self)
 
 	queue_free()

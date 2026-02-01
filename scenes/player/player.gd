@@ -51,6 +51,9 @@ func _exit_tree() -> void:
 	if debug_layers and LevelManager.layer_changed.is_connected(_on_layer_changed):
 		LevelManager.layer_changed.disconnect(_on_layer_changed)
 
+func get_hurt_sfx_key() -> StringName:
+	return &"player_hurt"
+
 func _physics_process(_delta: float) -> void:
 	if not is_alive:
 		return

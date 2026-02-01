@@ -62,13 +62,11 @@ height = 142.0
 
 [node name="GhostMob" instance=ExtResource("1_nxa06")]
 script = ExtResource("2_s6s5m")
-attack_range = 42.0
+attack_range = 44.5
 attack_windup = 0.08
 attack_active = 0.1
 attack_cooldown = 0.6
-debug_combat = true
-debug_geometry = true
-debug_sample_interval = 0.5
+hurt_sfx_key = &"ghost_hurt"
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.3, 0.3)

@@ -3,6 +3,7 @@ class_name BaseMob
 
 @export var move_speed: float = 120.0
 @export var repath_interval: float = 0.2  # how often we refresh target position
+@export var hurt_sfx_key: StringName = &"mob_hurt_generic"
 
 @onready var health: Health = $Health
 @onready var hurtbox: Hurtbox = $Hurtbox
@@ -23,6 +24,9 @@ func _ready() -> void:
 		agent.path_desired_distance = 4.0
 		agent.target_desired_distance = 6.0
 		agent.avoidance_enabled = false # turn on later if you want separation
+
+func get_hurt_sfx_key() -> StringName:
+	return hurt_sfx_key
 
 func set_target(t: Node2D) -> void:
 	target = t

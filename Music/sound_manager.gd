@@ -8,7 +8,9 @@ extends Node
 	"mask_toggle": [],
 	"player_swing": [],
 	"player_hurt": [],
-	"mob_hurt": [],
+	"mob_hurt_generic": [],
+	"bolzeur_hurt": [],
+	"ghost_hurt": [],
 	"mob_charge": [],
 	"mob_attack": []
 }

@@ -18,6 +18,7 @@ signal request_radial_shot(origin: Vector2, count: int)
 
 func _ready() -> void:
 	super._ready()
+	hurt_sfx_key = &"bolzeur_hurt"
 
 	var p := get_tree().get_first_node_in_group("player") as Node2D
 	if p:

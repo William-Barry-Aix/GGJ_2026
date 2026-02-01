@@ -53,6 +53,7 @@ radius = 17.691805
 [node name="BolzeurMob" instance=ExtResource("1_2g2ce")]
 collision_mask = 11
 script = ExtResource("2_yau0f")
+hurt_sfx_key = &"bolzeur_hurt"
 
 [node name="Sprite2D" parent="." index="0"]
 unique_name_in_owner = true

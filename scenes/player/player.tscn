@@ -46,11 +46,12 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
-radius = 116.00431
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_75vfm"]
+radius = 14.0
+height = 106.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
-size = Vector2(237, 145)
+size = Vector2(179.75, 145)
 
 [sub_resource type="Animation" id="Animation_p47bc"]
 resource_name = "walk_left"
@@ -220,13 +221,13 @@ health_path = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(-7, -1)
-shape = SubResource("CircleShape2D_p47bc")
+shape = SubResource("CapsuleShape2D_75vfm")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
 target_group = &"mob"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(-7, -1)
+position = Vector2(-6, -1)
 shape = SubResource("RectangleShape2D_75vfm")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]

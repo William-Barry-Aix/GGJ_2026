@@ -102,6 +102,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_h17s1"]
 resource_name = "attack_left"
 length = 0.15
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -118,6 +119,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_je7p5"]
 resource_name = "attack_right"
 length = 0.15
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

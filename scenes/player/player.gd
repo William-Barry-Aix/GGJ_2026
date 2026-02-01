@@ -7,6 +7,7 @@ signal reset_mob_target_pos(Vector2)
 @export var move_speed: float = 300.0
 @export var attack_duration: float = 0.12
 @export var attack_cooldown: float = 0.20
+@export var debug_input := false
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var health: Health = $Health
@@ -45,15 +46,15 @@ func _physics_process(_delta: float) -> void:
 
 	_handle_layer_hotkeys()
 	_handle_movement()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_alive:
-		return
-
-	if event.is_action_pressed("attack"):
+	if Input.is_action_just_pressed("attack"):
 		try_attack()
 
+func _input(event: InputEvent) -> void:
+	if not debug_input:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		var mb := event as InputEventMouseButton
+		print("[Input] mouse button=", mb.button_index, " attack_action=", event.is_action_pressed("attack"))
 
 func _handle_layer_hotkeys() -> void:
 	if Input.is_action_just_pressed("layer_1"):
@@ -105,25 +106,24 @@ func _handle_movement() -> void:
 func try_attack() -> void:
 	if not is_alive:
 		return
-
-	# Keep your existing rule: no attack when mask off
-	if LevelManager.current_layer == LevelManager.Layer.MASK_OFF:
-		return
-
 	if not _can_attack:
 		return
-
 	if melee_hitbox == null:
 		return
 
 	_can_attack = false
 	_attacking = true
 
-	# Play attack anim by facing
+	# Always play the animation
 	_play_anim("attack_right" if facing == Facing.RIGHT else "attack_left")
 
-	# Activate hitbox + sound
-	melee_hitbox.set_active(true)
+	# Only do damage when NOT mask off
+	var can_damage := LevelManager.current_layer != LevelManager.Layer.MASK_OFF
+
+	# Activate hitbox only if damaging
+	melee_hitbox.set_active(can_damage)
+
+	# Sound can play regardless (your choice)
 	if io_sword_sfx and io_sword_sfx.has_method("PLAYBACK_RANDOM"):
 		io_sword_sfx.PLAYBACK_RANDOM()
 
@@ -134,7 +134,7 @@ func try_attack() -> void:
 	melee_hitbox.set_active(false)
 	_attacking = false
 
-	# Return immediately to locomotion anim
+	# Back to locomotion anim
 	if velocity.length() > 0.01:
 		_play_anim("walk_right" if facing == Facing.RIGHT else "walk_left")
 	else:
@@ -143,8 +143,8 @@ func try_attack() -> void:
 	await get_tree().create_timer(attack_cooldown).timeout
 	if not is_alive or not is_inside_tree():
 		return
-
 	_can_attack = true
+
 
 
 func reset_after_respawn() -> void:

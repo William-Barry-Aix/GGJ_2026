@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwtfa7ex186jg"]
+[gd_scene load_steps=10 format=3 uid="uid://cwtfa7ex186jg"]
 
 [ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_klvpj"]
+[ext_resource type="Script" uid="uid://nbajq4xtuov4" path="res://scenes/mobs/ghost_mob.gd" id="2_iim8q"]
 [ext_resource type="Texture2D" uid="uid://rcb11ywwvfhe" path="res://assets/art/sprites/mobs/ghost_spritesheet.png" id="2_sawq8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sawq8"]
@@ -54,6 +55,10 @@ _data = {
 }
 
 [node name="GhostMob" instance=ExtResource("1_klvpj")]
+script = ExtResource("2_iim8q")
+attack_damage = 10
+attack_active = true
+repath_interval = 0.15
 
 [node name="Sprite2D" parent="." index="0"]
 texture_filter = 1

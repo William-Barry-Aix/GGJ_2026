@@ -2,7 +2,6 @@
 .godot/
 .nomedia
 
-scripts/
 # Godot-specific ignores
 *.import/
 *.import~

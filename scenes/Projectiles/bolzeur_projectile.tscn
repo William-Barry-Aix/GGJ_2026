@@ -1,87 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://bs1oyk7lsljrk"]
+[gd_scene load_steps=5 format=3 uid="uid://bs1oyk7lsljrk"]
 
-[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="1_tcmyc"]
-[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="2_ioaip"]
-[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="3_p2sy1"]
-[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="4_40hr1"]
-[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="5_j01xr"]
-[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="6_l3fnu"]
-[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="7_cp1yl"]
-[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="8_qmdbs"]
-[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="9_kmwx0"]
-[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="10_b3n6r"]
-[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="11_etun1"]
+[ext_resource type="Script" uid="uid://blmnskwpuu33r" path="res://scenes/projectiles/bolzeur_projectile.gd" id="1_f12mv"]
+[ext_resource type="PackedScene" uid="uid://dldr18unr3dp3" path="res://scenes/projectiles/base_projectile.tscn" id="1_pw0wn"]
+[ext_resource type="Texture2D" uid="uid://daoot62nqh25a" path="res://assets/art/sprites/mobs/DarkRedBlob.png" id="1_w1yb1"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_40hr1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_j01xr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_l3fnu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_cp1yl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_qmdbs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_kmwx0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_b3n6r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_etun1")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
+[sub_resource type="CircleShape2D" id="CircleShape2D_il5um"]
+radius = 15.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
-radius = 34.058773
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
-radius = 46.010868
-
-[node name="BolzeurMob" instance=ExtResource("1_tcmyc")]
-collision_mask = 11
-script = ExtResource("2_ioaip")
-hurt_sfx_key = &"bolzeur_hurt"
+[node name="BolzeurProjectile" instance=ExtResource("1_pw0wn")]
+script = ExtResource("1_f12mv")
 
 [node name="Sprite2D" parent="." index="0"]
-unique_name_in_owner = true
-texture = ExtResource("3_p2sy1")
+texture = ExtResource("1_w1yb1")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
-sprite_frames = SubResource("SpriteFrames_iw5st")
-autoplay = "default"
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_il5um")
 
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_213k8")
-
-[node name="NavigationAgent2D" parent="." index="3"]
-unique_name_in_owner = true
-debug_enabled = true
-debug_use_custom = true
-
-[node name="RayCastContainer" type="Node" parent="." index="4"]
-unique_name_in_owner = true
-
-[node name="Hurtbox" parent="." index="6"]
-collision_layer = 0
-collision_mask = 0
-health_path = NodePath("../Health")
-
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_24vju")
-
-[editable path="Hurtbox"]
 [editable path="Hitbox"]

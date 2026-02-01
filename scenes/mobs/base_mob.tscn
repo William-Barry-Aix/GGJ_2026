@@ -1,87 +1,24 @@
-[gd_scene load_steps=15 format=3 uid="uid://xgg8sv68o3vr"]
+[gd_scene load_steps=5 format=3 uid="uid://xgg8sv68o3vr"]
 
-[ext_resource type="Script" uid="uid://ctptdx5a7q75p" path="res://scenes/mobs/bolzeur_mob.gd" id="1_d85h4"]
-[ext_resource type="Texture2D" uid="uid://ben6sjdllbg4n" path="res://assets/art/sprites/mobs/GreenBlob.png" id="2_5eidw"]
-[ext_resource type="Texture2D" uid="uid://4ipuve5hkvc5" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_1.png" id="3_qudfw"]
-[ext_resource type="Texture2D" uid="uid://dsx0j0kl3pq1a" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_2.png" id="4_fn0wh"]
-[ext_resource type="Texture2D" uid="uid://c0nvwu3c2cfwl" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_3.png" id="5_mgjoj"]
-[ext_resource type="Texture2D" uid="uid://cklcvcasp16yh" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_4.png" id="6_mra8j"]
-[ext_resource type="Texture2D" uid="uid://dw6w1juwbj401" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_5.png" id="7_8fri2"]
-[ext_resource type="Texture2D" uid="uid://cau321kerqdcn" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_6.png" id="8_pbga1"]
-[ext_resource type="Texture2D" uid="uid://c7i8ysnkicwi2" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_7.png" id="9_pm738"]
-[ext_resource type="Texture2D" uid="uid://2ofcmbb4jlwf" path="res://assets/art/sprites/mobs/bolzeur/bolzeur_8.png" id="10_b4051"]
-[ext_resource type="PackedScene" uid="uid://xgg8sv68o3vr" path="res://scenes/mobs/base_mob.tscn" id="11_nopls"]
+[ext_resource type="Script" uid="uid://d4j6yek85dohu" path="res://scenes/mobs/base_mob.gd" id="1_lyppj"]
+[ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="2_nwr1u"]
+[ext_resource type="PackedScene" uid="uid://cuxfiydo0jxbj" path="res://scenes/combat/hurtbox.tscn" id="3_kvb4j"]
+[ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_2te0t"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iw5st"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_qudfw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_fn0wh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_mgjoj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_mra8j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_8fri2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_pbga1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_pm738")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_b4051")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
+[node name="BaseMob" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_lyppj")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
-radius = 34.058773
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
-radius = 46.010868
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="BolzeurMob" instance=ExtResource("11_nopls")]
-collision_mask = 11
-script = ExtResource("1_d85h4")
-hurt_sfx_key = &"bolzeur_hurt"
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="Sprite2D" parent="." index="0"]
-unique_name_in_owner = true
-texture = ExtResource("2_5eidw")
+[node name="Health" parent="." instance=ExtResource("2_nwr1u")]
 
-[node name="AnimatedSprite2D" parent="." index="1"]
-sprite_frames = SubResource("SpriteFrames_iw5st")
-autoplay = "default"
+[node name="Hurtbox" parent="." instance=ExtResource("3_kvb4j")]
 
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_213k8")
-
-[node name="NavigationAgent2D" parent="." index="3"]
-unique_name_in_owner = true
-debug_enabled = true
-debug_use_custom = true
-
-[node name="RayCastContainer" type="Node" parent="." index="4"]
-unique_name_in_owner = true
-
-[node name="Hurtbox" parent="." index="6"]
-collision_layer = 0
-collision_mask = 0
-health_path = NodePath("../Health")
-
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_24vju")
-
-[editable path="Hurtbox"]
-[editable path="Hitbox"]
+[node name="Hitbox" parent="." instance=ExtResource("4_2te0t")]
+target_group = &"player"

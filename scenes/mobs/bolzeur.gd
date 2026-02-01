@@ -1,5 +1,5 @@
 extends BaseMob
-class_name BolzeurMob
+class_name Bolzeur
 
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 
@@ -18,7 +18,6 @@ signal request_radial_shot(origin: Vector2, count: int)
 
 func _ready() -> void:
 	super._ready()
-	hurt_sfx_key = &"bolzeur_hurt"
 
 	var p := get_tree().get_first_node_in_group("player") as Node2D
 	if p:
@@ -61,9 +60,11 @@ func _update_timer() -> void:
 		cur_state = State.resting
 		phase_timer = 0.0
 		_send_attack()
+		$bolzeur_walk.play()
 	elif cur_state == State.chasing and phase_timer >= CHASING_TIME:
 		cur_state = State.charging
 		phase_timer = 0.0
+		$bolzeur_attack.play()
 	elif cur_state == State.resting and phase_timer >= RESTING_TIME:
 		cur_state = State.chasing
 		phase_timer = 0.0

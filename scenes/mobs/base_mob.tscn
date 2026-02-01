@@ -22,3 +22,5 @@ script = ExtResource("1_lyppj")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_2te0t")]
 target_group = &"player"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

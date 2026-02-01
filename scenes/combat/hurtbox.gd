@@ -4,7 +4,7 @@ class_name Hurtbox
 @export var health_path: NodePath
 @onready var health: Health = get_node_or_null(health_path) as Health
 
-@export var debug_print: bool = true
+@export var debug_print: bool = false
 
 func _ready() -> void:
 	add_to_group("hurtbox")

@@ -2,7 +2,7 @@ extends Area2D
 class_name Hitbox
 
 @export var damage: int = 10
-@export var debug_print: bool = true
+@export var debug_print: bool = false
 
 @export var active: bool = false:
 	set(value):

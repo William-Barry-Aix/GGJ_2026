@@ -45,10 +45,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_213k8"]
-radius = 14.0
+radius = 34.058773
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_24vju"]
-radius = 17.691805
+radius = 46.010868
 
 [node name="BolzeurMob" instance=ExtResource("1_2g2ce")]
 collision_mask = 11
@@ -64,6 +64,7 @@ sprite_frames = SubResource("SpriteFrames_iw5st")
 autoplay = "default"
 
 [node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_213k8")
 
 [node name="NavigationAgent2D" parent="." index="3"]

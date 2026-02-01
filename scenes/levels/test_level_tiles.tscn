@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://dlqeifrqd8kjf"]
+[gd_scene load_steps=3 format=4 uid="uid://dlqeifrqd8kjf"]
 
 [ext_resource type="PackedScene" uid="uid://dac228gkovlx8" path="res://scenes/levels/base_level.tscn" id="1_jbqir"]
 [ext_resource type="Texture2D" uid="uid://cs6mc35gacqxw" path="res://assets/art/sprites/tilesets/spaceship_placeholder.png" id="2_yautc"]
-[ext_resource type="PackedScene" uid="uid://cwtfa7ex186jg" path="res://scenes/mobs/ghost_mob.tscn" id="3_o2ned"]
 
 [node name="TestLevel" instance=ExtResource("1_jbqir")]
 
@@ -17,5 +16,3 @@ tile_map_data = PackedByteArray("AAD//wAAAAAEAAsAAAAAAAAAAAADAAoAAAABAAAAAAAEAAs
 
 [node name="HolesBlue" parent="Tilemaps" index="2"]
 tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAA=")
-
-[node name="GhostMob" parent="Entities/Mobs" index="0" instance=ExtResource("3_o2ned")]

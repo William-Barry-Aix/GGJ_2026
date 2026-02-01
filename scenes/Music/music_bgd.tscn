@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyvogqb01ms2d"]
+
+[ext_resource type="AudioStream" uid="uid://ci1ywjkx23fj4" path="res://Music/iota_music_l0.mp3" id="1_r7vj6"]
+[ext_resource type="Script" uid="uid://c47fr5npb7u4x" path="res://Music/music_bgd.gd" id="2_modgw"]
+[ext_resource type="AudioStream" uid="uid://i6baa84of2ms" path="res://Music/iota_music_l1.mp3" id="3_oo2t7"]
+[ext_resource type="AudioStream" uid="uid://cxkd66pw6klh2" path="res://Music/iota_music_l2.mp3" id="4_vcufx"]
+[ext_resource type="AudioStream" uid="uid://bgy6uxxultrr" path="res://Music/iota_music_l3.mp3" id="5_4vdjs"]
+[ext_resource type="AudioStream" uid="uid://b312yaiccre5t" path="res://SFX/Io/change_mask.mp3" id="6_oo2t7"]
+
+[node name="MusicBgd" type="AudioStreamPlayer"]
+stream = ExtResource("1_r7vj6")
+autoplay = true
+bus = &"Music0"
+script = ExtResource("2_modgw")
+
+[node name="Musicl1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oo2t7")
+autoplay = true
+bus = &"Music1"
+
+[node name="Musicl2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vcufx")
+autoplay = true
+bus = &"Music2"
+
+[node name="Musicl3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4vdjs")
+autoplay = true
+bus = &"Music3"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="mask_sound" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("6_oo2t7")
+bus = &"SFX"

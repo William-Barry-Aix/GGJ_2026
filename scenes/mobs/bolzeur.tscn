@@ -42,6 +42,7 @@ shape = SubResource("CircleShape2D_24vju")
 
 [node name="bolzeur_attack" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource("4_hxt15")
+max_distance = 200.0
 
 [node name="bolzeur_walk" type="AudioStreamPlayer2D" parent="." index="8"]
 stream = ExtResource("5_2hksd")

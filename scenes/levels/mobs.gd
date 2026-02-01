@@ -3,8 +3,8 @@ extends Node2D
 const BOLZEUR_NODE := preload("res://scenes/mobs/bolzeur.tscn")
 const GHOST_NODE   := preload("res://scenes/mobs/ghost_mob.tscn") # <-- adjust path if yours differs
 
-@export var bolzeur_count: int = 0
-@export var ghost_count: int = 1
+@export var bolzeur_count: int = 3
+@export var ghost_count: int = 3
 @export var spawn_radius: float = 640.0
 @export var min_spawn_distance: float = 120.0 # don't spawn on top of player
 

@@ -8,6 +8,7 @@ signal reset_mob_target_pos(Vector2)
 @export var attack_duration: float = 0.12
 @export var attack_cooldown: float = 0.20
 @export var debug_input := false
+@export var attack_damage: int = 20
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var health: Health = $Health
@@ -33,6 +34,7 @@ func _ready() -> void:
 		health.died.connect(_on_died)
 
 	if melee_hitbox:
+		melee_hitbox.damage = attack_damage
 		melee_hitbox.target_group = &"mob"
 		melee_hitbox.set_active(false)
 

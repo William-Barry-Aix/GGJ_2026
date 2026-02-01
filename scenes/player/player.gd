@@ -33,6 +33,7 @@ func _ready() -> void:
 		health.died.connect(_on_died)
 
 	if melee_hitbox:
+		melee_hitbox.target_group = &"mob"
 		melee_hitbox.set_active(false)
 
 	# Start idle facing right by default
@@ -103,6 +104,8 @@ func _handle_movement() -> void:
 ### Combat and death ###
 
 func try_attack() -> void:
+	print("[Player] try_attack called. can_attack=", _can_attack, " alive=", is_alive, " layer=", LevelManager.current_layer)
+
 	if not is_alive:
 		return
 	if not _can_attack:

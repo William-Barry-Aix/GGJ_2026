@@ -9,7 +9,8 @@ class_name BaseProjectile
 var direction: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
-	hitbox.set_active(true)
+	if hitbox:
+		hitbox.set_active(true)
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 

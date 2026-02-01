@@ -17,7 +17,7 @@ radius = 8.0
 height = 58.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p47bc"]
-size = Vector2(90, 86)
+size = Vector2(127, 86)
 
 [sub_resource type="Animation" id="Animation_75vfm"]
 length = 0.001
@@ -173,10 +173,9 @@ position = Vector2(2, -2)
 shape = SubResource("CapsuleShape2D_75vfm")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
-target_group = &"mob"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(2, -2)
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_p47bc")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]

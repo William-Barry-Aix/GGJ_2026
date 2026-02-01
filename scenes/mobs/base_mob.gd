@@ -9,6 +9,7 @@ signal mob_died(mob: BaseMob)
 @onready var anim: AnimationPlayer = get_node_or_null("AnimationPlayer") as AnimationPlayer
 @onready var health: Health = $Health
 @onready var hurtbox: Hurtbox = $Hurtbox
+@onready var hitbox: Hitbox = $Hitbox
 @onready var agent: NavigationAgent2D = $NavigationAgent2D if has_node("NavigationAgent2D") else null
 
 var target: Node2D = null
@@ -20,6 +21,10 @@ func _ready() -> void:
 
 	if health:
 		health.died.connect(_on_died)
+		print("[BaseMob] ", name, " connected to health.died. HP=", health.current_health)
+	if hitbox:
+		hitbox.target_group = &"player"
+		hitbox.set_active(false)
 
 	_play_default_anim()
 
@@ -63,6 +68,7 @@ func _move_towards_target() -> void:
 
 
 func _on_died() -> void:
+	print("[BaseMob] _on_died called for ", name)
 	is_alive = false
 	set_physics_process(false)
 	set_process(false)

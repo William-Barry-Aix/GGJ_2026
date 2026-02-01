@@ -2,7 +2,7 @@ extends Node
 
 signal layer_changed(layer: int)
 
-@onready var music := get_tree().root.get_node("Music0")
+@onready var music := get_tree().root.get_node("MusicBgd")
 
 enum Layer { MASK_OFF = 1, RED = 2, GREEN = 3, BLUE = 4 }
 

@@ -23,8 +23,8 @@ config/icon="res://assets/art/sprites/ui/icon.svg"
 
 LevelManager="*res://autoload/level_manager.gd"
 PortalManager="*res://autoload/portal_manager.gd"
-Music0="*res://scenes/Music/music_0.tscn"
 GameConfig="*res://autoload/game_config.gd"
+MusicBgd="*res://scenes/Music/music_bgd.tscn"
 
 [global_group]
 

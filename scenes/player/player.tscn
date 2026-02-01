@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dnkvseka2im44" path="res://scenes/combat/hitbox.tscn" id="4_p47bc"]
 [ext_resource type="PackedScene" uid="uid://c2x6k6r12d1x2" path="res://scenes/combat/health.tscn" id="5_p47bc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
-radius = 26.019224
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p47bc"]
+radius = 12.0
+height = 104.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
 radius = 116.00431
@@ -153,7 +154,8 @@ hframes = 5
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_75vfm")
+position = Vector2(-7, -1)
+shape = SubResource("CapsuleShape2D_p47bc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -162,13 +164,14 @@ zoom = Vector2(1.5, 1.5)
 health_path = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(-7, -1)
 shape = SubResource("CircleShape2D_p47bc")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_p47bc")]
 target_group = &"mob"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(0, 1)
+position = Vector2(-7, -1)
 shape = SubResource("RectangleShape2D_75vfm")
 
 [node name="Health" parent="." instance=ExtResource("5_p47bc")]

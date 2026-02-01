@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 
 #indexage des bus sonores
 @onready var music0busindex = AudioServer.get_bus_index("Music0")

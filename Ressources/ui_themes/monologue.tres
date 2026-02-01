@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cr52mbcx2r3p0"]
+
+[ext_resource type="FontFile" uid="uid://bxbts52akbam2" path="res://assets/fonts/TerminalVelocity-2.ttf" id="1_deap7"]
+[ext_resource type="FontFile" uid="uid://ddwi6cg2ki8pr" path="res://assets/fonts/VT323-Regular.ttf" id="1_wq6xn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hqnrr"]
+
+[resource]
+Label/colors/font_color = Color(0.14901961, 0.7882353, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.5254902)
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_wq6xn")
+Panel/styles/panel = SubResource("StyleBoxEmpty_hqnrr")
+TextEdit/font_sizes/font_size = 64
+TextEdit/fonts/font = ExtResource("1_deap7")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv20wuwjym7re"]
+[gd_scene load_steps=4 format=3 uid="uid://bv20wuwjym7re"]
 
 [ext_resource type="Script" uid="uid://dvuhu70mj5lkb" path="res://scenes/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="Theme" uid="uid://cr52mbcx2r3p0" path="res://Ressources/ui_themes/monologue.tres" id="2_bo48s"]
+[ext_resource type="Script" uid="uid://dvwm6ljits8od" path="res://scenes/ui/tought_container.gd" id="2_hqnrr"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -45,3 +47,29 @@ grow_vertical = 2
 [node name="HBox" type="HBoxContainer" parent="BottomAnchor/BottomBar"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="ToughtContainer" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_bo48s")
+script = ExtResource("2_hqnrr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToughtContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ToughtContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20

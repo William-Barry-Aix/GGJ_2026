@@ -34,13 +34,13 @@ func _physics_process(delta: float) -> void:
 		State.idle:
 			return
 		State.chasing:
-			_chase(delta)
+			_chase()
 		State.charging:
 			pass
 		State.resting:
 			pass
 
-func _chase(delta: float) -> void:
+func _chase() -> void:
 	if target == null:
 		return
 	nav2d.target_position = target.global_position

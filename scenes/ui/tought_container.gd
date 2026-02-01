@@ -15,8 +15,10 @@ const INTRO_INTERVAL = 2.0
 const MARGIN_LABELS = 5
 const MAX_LETTER_INTERVAL = 0.4
 const MIN_LETTER_INTERVAL = 0.1
+const MAX_LABELS = 3
 
 @onready var vbox := %VBoxContainer
+@onready var mbox := %MarginContainer
 @onready var ui_theme := preload("res://Ressources/ui_themes/monologue.tres")
 @onready var rng = RandomNumberGenerator.new()
 
@@ -73,7 +75,7 @@ func monologue_intro() -> void:
 	intro_index += 1
 
 func instantiate_monologue_label(text : String) -> void:
-	if vbox.get_child_count() > 4:
+	if vbox.get_child_count() > MAX_LABELS:
 		vbox.get_child(1).queue_free()
 	var new_mbox = MarginContainer.new()
 	new_mbox.add_theme_constant_override("margin_top", MARGIN_LABELS)

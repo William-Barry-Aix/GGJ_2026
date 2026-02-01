@@ -12,6 +12,9 @@ func _enter_tree() -> void:
 @onready var walls_green: TileMapLayer = get_node_or_null("Tilemaps/WallsGreen") as TileMapLayer
 @onready var spikes_red: TileMapLayer = get_node_or_null("Tilemaps/SpikesRed") as TileMapLayer
 @onready var holes_blue: TileMapLayer = get_node_or_null("Tilemaps/HolesBlue") as TileMapLayer
+@onready var doors_Green: TileMapLayer = get_node_or_null("Tilemaps/DoorGreen") as TileMapLayer
+@onready var doors_Red: TileMapLayer = get_node_or_null("Tilemaps/DoorRed") as TileMapLayer
+@onready var doors_Blue: TileMapLayer = get_node_or_null("Tilemaps/DoorBlue") as TileMapLayer
 
 var _base_collision_layer: int = 0
 var _active_collision_layer: int = 0
@@ -59,12 +62,21 @@ func _update_tilemaps_for_layer(layer: int) -> void:
 	_set_tilemap_active(walls_green, layer == LevelManager.Layer.GREEN)
 	_set_tilemap_active(spikes_red, layer == LevelManager.Layer.RED)
 	_set_tilemap_active(holes_blue, layer == LevelManager.Layer.BLUE)
+	_set_tilemap_active(doors_Green, layer == LevelManager.Layer.GREEN)
+	_set_tilemap_active(doors_Red, layer == LevelManager.Layer.RED)
+	_set_tilemap_active(doors_Blue, layer == LevelManager.Layer.BLUE)
 
 func _set_tilemap_active(tilemap: TileMapLayer, is_active: bool) -> void:
 	if tilemap == null:
 		return
 
 	tilemap.visible = is_active
+
+	# Si ce TileMapLayer est une porte (Door.gd), on met en pause
+	# le flip-flop automatique quand la couche est désactivée.
+	if tilemap.has_method("set_flip_flop_paused"):
+		# paused = not is_active
+		tilemap.call_deferred("set_flip_flop_paused", not is_active)
 
 	# This property exists in some Godot 4 builds
 	if tilemap.has_method("set_collision_enabled"):

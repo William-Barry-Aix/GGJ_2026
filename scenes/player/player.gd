@@ -16,7 +16,6 @@ signal reset_mob_target_pos(Vector2)
 
 # Optional audio nodes (keep your names)
 @onready var io_walk: AudioStreamPlayer2D = $io_walk
-@onready var io_sword_sfx := $io_sword_sfx
 
 enum Facing { RIGHT, LEFT }
 var facing: int = Facing.RIGHT
@@ -116,7 +115,6 @@ func try_attack() -> void:
 
 	# Always play the animation
 	_play_anim("attack_right" if facing == Facing.RIGHT else "attack_left")
-
 	# Only do damage when NOT mask off
 	var can_damage := LevelManager.current_layer != LevelManager.Layer.MASK_OFF
 
@@ -124,8 +122,7 @@ func try_attack() -> void:
 	melee_hitbox.set_active(can_damage)
 
 	# Sound can play regardless (your choice)
-	if io_sword_sfx and io_sword_sfx.has_method("PLAYBACK_RANDOM"):
-		io_sword_sfx.PLAYBACK_RANDOM()
+	$attack_sfx._play_random_sound()
 
 	await get_tree().create_timer(attack_duration).timeout
 	if not is_alive or not is_inside_tree():

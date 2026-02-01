@@ -31,6 +31,7 @@ func apply_damage(amount: int) -> void:
 	current_health = max(0, current_health - amount)
 	_invuln_until_ms = Time.get_ticks_msec() + int(invuln_seconds * 1000.0)
 	changed.emit(current_health, max_health)
+	$dmg_sfx._play_random_sound()
 
 	if current_health == 0:
 		died.emit()

@@ -5,6 +5,7 @@ extends AudioStreamPlayer
 @onready var music1busindex = AudioServer.get_bus_index("Music1")
 @onready var music2busindex = AudioServer.get_bus_index("Music2")
 @onready var music3busindex = AudioServer.get_bus_index("Music3")
+@onready var musicsfxbusindex = AudioServer.get_bus_index("SFX")
 @onready var mask_sound = $SFX/mask_sound
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +13,9 @@ func _ready() -> void:
 	AudioServer.set_bus_mute(music1busindex, true)
 	AudioServer.set_bus_mute(music2busindex, true)
 	AudioServer.set_bus_mute(music3busindex, true)
+	AudioServer.set_bus_mute(musicsfxbusindex, true)
+	await get_tree().create_timer(0.2).timeout
+	AudioServer.set_bus_mute(musicsfxbusindex, false)
 
 func mute_layer(musicindex):
 	if !AudioServer.is_bus_mute(musicindex):

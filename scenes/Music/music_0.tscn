@@ -9,7 +9,6 @@
 
 [node name="Music0" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_vjj4h")
-autoplay = true
 bus = &"Music0"
 script = ExtResource("2_vjj4h")
 

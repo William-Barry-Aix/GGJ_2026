@@ -117,6 +117,7 @@ func _handle_movement() -> void:
 ### Combat and death ###
 
 func try_attack() -> void:
+	SoundManager.play_from(self, &"player_swing", 0.95, 1.05, -2.0)
 	if debug_combat or debug_input:
 		print("[Player] try_attack called. alive=", is_alive,
 			" layer=", LevelManager.current_layer,

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhdna0g1wnc35"]
+[gd_scene load_steps=6 format=3 uid="uid://bhdna0g1wnc35"]
 
 [ext_resource type="Script" uid="uid://csvantjxsvsqn" path="res://scenes/root/game_root.gd" id="1_oamxu"]
 [ext_resource type="PackedScene" uid="uid://dnx8flce3g5qd" path="res://scenes/player/player.tscn" id="2_2eikp"]
 [ext_resource type="PackedScene" uid="uid://dlqeifrqd8kjf" path="res://scenes/levels/test_level_main.tscn" id="2_q82se"]
 [ext_resource type="PackedScene" uid="uid://bv20wuwjym7re" path="res://scenes/ui/hud.tscn" id="3_q82se"]
+[ext_resource type="PackedScene" uid="uid://b2137g1a46ja" path="res://scenes/Music/sound_manager.tscn" id="5_orhnb"]
 
 [node name="GameRoot" type="Node"]
 script = ExtResource("1_oamxu")
@@ -18,3 +19,12 @@ position = Vector2(-924, 202)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="UI" instance=ExtResource("3_q82se")]
+
+[node name="SoundManager" parent="." instance=ExtResource("5_orhnb")]
+library = {
+"mask_toggle": [],
+"mob_attack": [],
+"mob_charge": [],
+"mob_hurt": [],
+"player_hurt": []
+}
